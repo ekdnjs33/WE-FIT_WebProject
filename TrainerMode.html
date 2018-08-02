@@ -2,26 +2,87 @@
 <html>
 <head>
   <title>WE FIT - TrainerMode</title>
+  <script language="JavaScript">
+  function showPopup(){window.open("CreateRoom.html", "CreateRoom", "width=400px, height=200px, left=100px, top=50px");}
+  </script>
   <style type="text/css">
   body{
     background:#f5c94c;
   }
   a{
+    color:black;
     text-decoration: none;
+  }
+  table, th, td{
+    border:1px solid black;
+    border-collapse:collapse;
+    text-align:center;
+  }
+  th, td{
+    padding: 13px;
+  }
+  .make{
+    width:150px;
+    background-color:#813f7f;
+    border: none;
+    border-radius:10px;
+    color:#fff;
+    padding: 15px;
+    text-align: center;
+    display: inline-block;
+    font: 15pt '210 데이라잇';
+    margin: 4px;
+    cursor: pointer;
   }
   #top{
     color:black;
-    height:120pt;
+    /*height:180pt;*/
     padding-left:15px;
     font:22pt '210 데이라잇';
+  }
+  #bottom{
+    color:black;
+    padding-left:15px;
+    font:18pt '210 데이라잇';
   }
   </style>
 </head>
 <body>
-  <a href="SelectMode.html">
   <div id="top">
-    <br><img src="logo.png" width="7%" align="center"> 트레이너 모드입니다!
+    <a href="SelectMode.html">
+    <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"> 트레이너 모드입니다!</a>
+    <p align="right" style="margin-top:20px; margin-right:70px"><input class="make" type="button" value="방 생성하기" onclick="showPopup();"/></p>
   </div>
-  </a>
+  <center>
+  <div id="bottom">
+    <table width="90%">
+      <caption style="padding:15px">전체 방 목록</caption>
+      <colgroup>
+        <col width="10%">
+        <col width="60%">
+        <col width="10%">
+        <col width="20%">
+      </colgroup>
+      <thead>
+        <tr style="background:#b2afa6">
+          <td>번호</td>
+          <td>방 이름</td>
+          <td>트레이너</td>
+          <td>입장</td>
+        </tr>
+      <thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>we fit class</td>
+          <td>ekdnjs</td>
+          <td>
+            <a href="ekdnjs.html" style="color:white">입장하기</a>
+          </td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+  </center>
 </body>
 </html>
