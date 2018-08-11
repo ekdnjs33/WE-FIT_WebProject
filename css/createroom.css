@@ -1,0 +1,33 @@
+body{
+  color: white;
+  background: #f5c94c;
+  font: 15pt '210 데이라잇';
+}
+p{
+  margin: 15px;
+}
+form{
+  padding: 50px;
+}
+#box{
+  margin-top: 50px;
+  border-radius: 10px;
+  background: #b2afa6;
+  height: 250px;
+  width: 500px;
+  color: black;
+}
+.finish {
+  width: 90px;
+  background: #813f7f;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  font: 18px '210 데이라잇';
+  margin: 4px;
+  cursor: pointer;
+}
+.btn input[type=submit]
