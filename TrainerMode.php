@@ -54,7 +54,7 @@ $number=0; //방 번호
       <tbody>
         <tr>
           <td><?php echo $number; ?></td>
-          <td><a href="ingUser.html?<?php echo "roomname=$title";?>" style="color:#68217A"><?php echo $board['title']; ?></a></td>
+          <td><a href="TMEntrance.html?<?php echo "roomname=$title";?>" style="color:#68217A"><?php echo $board['title']; ?></a></td>
           <td><?php echo $board['createrid']; ?></td>
           <td><?php echo $board['createdate']; ?></td>
         </tr>
