@@ -1,18 +1,23 @@
 <!doctype html>
 <html>
 <head>
+  <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - Main</title>
   <link href="css/index.css" rel="stylesheet"></link>
 </head>
 <body>
   <center>
-  <a href="SelectMode.html">
-  <div style="margin-top:100px">
+  <div class="logo">
     <img src="logo.png" alt="we fit 로고" width="30%">
   </div>
   </a>
-  <div id="font1" style="margin-top:60px">
-    프로그램 실행을 위해 먼저<br><br>어플리케이션에서 로그인해주세요.
+  <div id="login">
+    <form method="post" action="login.php">
+      <input type="text" class="form-control" placeholder="아이디" name="userid" maxlength="20" required="required" value="ekdnjs">
+      <input type="password" class="form-control" placeholder="비밀번호" name="userpw" maxlength="20" value="dawon217">
+      <input type="submit" class="finish" value="로그인">
+    </form>
+    <p class="font">동시에 어플리케이션에서도 로그인을 해주세요.</p>
   </div>
   </center>
 </body>

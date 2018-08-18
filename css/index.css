@@ -1,7 +1,32 @@
 body{
   background:#f5c94c;
 }
-#font1 {
+#login{
+  margin-top: 50px;
+}
+.logo{
+  margin-top:100px;
+}
+.font{
+  margin-top:40px;
   font-family:'210 데이라잇';
-  font-size:22pt;
+  font-size:18pt;
+}
+.form-control{
+  padding-left: 7px;
+  height: 25px;
+  width: 200px;
+  font-size: 10pt;
+  /*text-align: center;*/
+}
+.finish {
+  width: 120px;
+  background: #813f7f;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px;
+  font: 14pt "210 데이라잇";
+  margin: 10px 6px;
+  cursor: pointer;
 }
