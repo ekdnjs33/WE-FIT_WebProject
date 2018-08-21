@@ -49,13 +49,15 @@ $number=0; //방 번호
       <?php $sql=mysqli_query($db, "SELECT * FROM triroom ORDER BY idx DESC LIMIT 0,7");
       while($board=mysqli_fetch_array($sql)){
         $title=$board['title'];
+        $idx=$board['idx'];
+        $trainer=$board['createrid'];
         $number+=1;
       ?>
       <tbody>
         <tr>
           <td><?php echo $number; ?></td>
-          <td><a href="TMEntrance.html?<?php echo "roomname=$title";?>" style="color:#68217A"><?php echo $board['title']; ?></a></td>
-          <td><?php echo $board['createrid']; ?></td>
+          <td><a href="TMEntrance.php?<?php echo "roomtitle=$title&roomidx=$idx&trainer=$trainer";?>" style="color:#68217A"><?php echo $title; ?></a></td>
+          <td><?php echo $trainer; ?></td>
           <td><?php echo $board['createdate']; ?></td>
         </tr>
       <tbody>
