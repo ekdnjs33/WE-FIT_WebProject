@@ -1,5 +1,6 @@
 <?php
 /*트레이너 모드에서 방을 생성하는 코드*/
+echo '<meta http-equiv="Content-Type" content="text/html" charset="utf-8">';
 echo "<body style='background:#f5c94c'>";
 include('lock.php');
 

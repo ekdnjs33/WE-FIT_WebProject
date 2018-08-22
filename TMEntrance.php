@@ -11,6 +11,9 @@ if($login_session == $trainer){
 }else{
   $player_sql=mysqli_query($db, "INSERT INTO player(idx, id, checkT) VALUES($roomidx, $player, 0)");
 }
+
+$list=[];
+$num=0;
 ?>
 <!doctype html>
 <html>
@@ -23,7 +26,7 @@ if($login_session == $trainer){
 
 <body style="margin:8px; background:#f5c94c">
   <div id="top">
-    <a href="trainermode.php" style="text-decoration: none; color:black;">
+    <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>" style="text-decoration: none; color:black;">
     <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
     <!--<span align="center" style=" font-size:18pt; margin-left:190px;">키넥트 센서와 웨어러블 기기의 블루투스를 연결해주세요!</span>-->
     <a href="ingUser.html?<?php echo "roomtitle=$roomtitle";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
@@ -38,12 +41,10 @@ if($login_session == $trainer){
        <img src="img/user-silhouette.png" style="width:100px; height:100px;"/>
        <br><br>
       <h5 class="card-title">
-        <?php $sql=mysqli_query($db, "SELECT checkT, userid FROM player, login, triroom WHERE player.id=login.id AND player.idx=triroom.idx AND title='".$roomtitle."'");
+        <?php $sql=mysqli_query($db, "SELECT checkT, email FROM player, users, triroom WHERE player.id=users.id AND player.idx=triroom.idx AND title='".$roomtitle."'");
         while($board=mysqli_fetch_array($sql)){
-          $playerid=$board['userid'];
+          $playerid=$board['email'];
           $trainercheck=$board['checkT'];
-          $list=[];
-          $num=0;
 
           if($trainercheck==1){
             echo $playerid;

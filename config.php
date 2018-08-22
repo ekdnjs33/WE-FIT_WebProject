@@ -1,9 +1,9 @@
 <?php
-/*DB 접속을 위한 코드*/
+/*14.49.37.187 DB 접속을 위한 코드*/
 $mysql_hostname = "localhost";
 $mysql_user = "root";
-$mysql_pw = "jamie0507";
-$mysql_db = "android_api";
+$mysql_pw = "dawon";
+$mysql_db = "wefit";
 
 $db = mysqli_connect($mysql_hostname, $mysql_user, $mysql_pw, $mysql_db);
 

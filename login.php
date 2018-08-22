@@ -1,5 +1,6 @@
 <?php
 /*로그인시, 아이디나 패스워드가 존재하는지를 검사하는 코드*/
+echo '<meta http-equiv="Content-Type" content="text/html" charset="utf-8">';
 echo "<body style='background:#f5c94c'>";
 include("config.php");
 session_start();
