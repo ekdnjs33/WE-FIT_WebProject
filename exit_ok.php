@@ -1,5 +1,6 @@
 <?php
 /*자신이 속한 방(TMEntrance)에서 나가는 코드*/
+echo '<meta http-equiv="Content-Type" content="text/html" charset="utf-8">';
 echo "<body style='background:#f5c94c'>";
 include('lock.php');
 

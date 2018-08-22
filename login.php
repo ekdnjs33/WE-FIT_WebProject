@@ -36,6 +36,7 @@ if($_POST["userid"] != ""){ //index에서 가져오는 부분
     //echo " 존재함";
   }else{
     echo '<script type ="text/javascript">alert("아이디나 패스워드를 잘못 입력하셨습니다.")</script>';
+    //echo "$salt  $encrypted_password  $hash";
     echo "<meta http-equiv='refresh' content='0; url=index.html'>";
     //Testing
     //echo " 존재하지 않음";
