@@ -16,5 +16,5 @@ if(!$db){
   die('MySQL connect ERROR: '.mysqli_error());
 }else{
   echo "MySQL 연결 완료!";
-}
+}*/
 ?>

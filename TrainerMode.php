@@ -7,7 +7,7 @@ $number=0; //방 번호
 <html>
 <head>
   <!--5초마다 방 목록 새로고침-->
-  <meta http-equiv=refresh content='5; url=TrainerMode.php'>
+  <meta http-equiv=refresh content='5; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - TrainerMode</title>
   <script src="js/jquery.js"></script>

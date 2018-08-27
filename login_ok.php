@@ -1,5 +1,5 @@
 <?php
-/*로그인시, 아이디나 패스워드가 존재하는지를 검사하는 코드*/
+/*로그인 시, 아이디나 비밀번호가 존재하는지를 검사하는 코드*/
 echo '<meta http-equiv="Content-Type" content="text/html" charset="utf-8">';
 echo "<body style='background:#f5c94c'>";
 include("config.php");
@@ -35,7 +35,7 @@ if($_POST["userid"] != ""){ //index에서 가져오는 부분
     //Testing
     //echo " 존재함";
   }else{
-    echo '<script type ="text/javascript">alert("아이디나 패스워드를 잘못 입력하셨습니다.")</script>';
+    echo '<script type ="text/javascript">alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.")</script>';
     //echo "$salt  $encrypted_password  $hash";
     echo "<meta http-equiv='refresh' content='0; url=index.html'>";
     //Testing

@@ -9,6 +9,7 @@ $ses_sql=mysqli_query($db, "SELECT * FROM users WHERE email='".$user_check."'");
 $row=mysqli_fetch_array($ses_sql);
 
 $login_session=$row['email']; //가져온 row의 email값을 대입
+$player_major=$row['major'];
 
 if(!isset($login_session)){
   header("Location:index.html");

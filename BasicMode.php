@@ -1,3 +1,6 @@
+<?php
+include('lock.php');
+?>
 <!doctype html>
 <html>
 <head>
@@ -13,15 +16,15 @@
   </div>
   </a>
   <div id="bottom">
-    <a href="Basic1.html">
+    <a href="Basic1.php">
       <div class="mode"><p>기본 1 코스(Basic 1)</p>
       </div>
     </a>
-    <a href="Basic2.html">
+    <a href="Basic2.php">
       <div class="mode"><p>기본 2 코스(Basic 2)</p>
       </div>
     </a>
-    <a href="Basic3.html">
+    <a href="Basic3.php">
       <div class="mode"><p>기본 3 코스(Basic 3)</p>
       </div>
     </a>

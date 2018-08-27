@@ -1,3 +1,6 @@
+<?php
+include('lock.php');
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -20,7 +23,7 @@
           <p class="score">90</p>
         </div>
         <div class="stopbtn">
-          <a href="BasicMode.html"><input class="finish" type="button" value="중단하기"></a>
+          <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
         </div>
       </div>
       <div class="two3">사용자 영상</div>

@@ -7,9 +7,9 @@ $trainer=$_GET['trainer'];
 $player=$row['id'];
 
 if($login_session == $trainer){
-  $trainer_sql=mysqli_query($db, "INSERT INTO player(idx, id, checkT) VALUES($roomidx, $player, 1)");
+  $trainer_sql=mysqli_query($db, "INSERT INTO player(idx, id, checkT, score) VALUES($roomidx, $player, 1, 100)");
 }else{
-  $player_sql=mysqli_query($db, "INSERT INTO player(idx, id, checkT) VALUES($roomidx, $player, 0)");
+  $player_sql=mysqli_query($db, "INSERT INTO player(idx, id, checkT, score) VALUES($roomidx, $player, 0, 100)");
 }
 
 $list=[];
@@ -18,6 +18,8 @@ $num=0;
 <!doctype html>
 <html>
 <head>
+  <!--5초마다 방 목록 새로고침-->
+  <meta http-equiv=refresh content='5; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - StayMode</title>
   <link href="css/trainermode.css" rel="stylesheet"></link>
@@ -29,7 +31,7 @@ $num=0;
     <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>" style="text-decoration: none; color:black;">
     <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
     <!--<span align="center" style=" font-size:18pt; margin-left:190px;">키넥트 센서와 웨어러블 기기의 블루투스를 연결해주세요!</span>-->
-    <a href="ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
+    <a href="ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
   </div>
 
   <div class="content-wrapper">
