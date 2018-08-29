@@ -6,7 +6,7 @@ include('lock.php');
 
 date_default_timezone_set("Asia/Seoul");//서울시간
 
-$date=date('Y-m-d H:i');
+$date=date('Y-m-d H:i:s');
 $roompw=$_POST['roompw'];
 //비밀번호 암호화
 //password_hash($_POST['roompw'], PASSWORD_DEFAULT);

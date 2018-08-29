@@ -18,8 +18,8 @@ $num=0;
 <!doctype html>
 <html>
 <head>
-  <!--5초마다 방 목록 새로고침-->
-  <meta http-equiv=refresh content='5; url='>
+  <!--3초마다 방 목록 새로고침-->
+  <meta http-equiv=refresh content='3; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - StayMode</title>
   <link href="css/trainermode.css" rel="stylesheet"></link>

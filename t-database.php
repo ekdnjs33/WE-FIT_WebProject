@@ -4,7 +4,7 @@ include('config.php');
 $json_data = $_POST['triData'];
 $value = json_decode(stripcslashes($json_data));
 
-$minus=$value['minusScore'];
+$minus=$value['minus'];
 $pmajor=$value['pmajor'];
 
 //수강생의 major에 따른 현재 저장된 score, id, idx를 가져옴

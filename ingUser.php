@@ -27,8 +27,8 @@ $playtime=date('Y-m-d H:i:s');
     function trainerServerCall(tmajor, pmajor, nowtime){
       var allData = {"sourceUser":tmajor, "targetUser":pmajor, "now":nowtime};
       $.ajax({
-      	url: "http://localhost:8080/algorithm/mode1/ 트레이너 major id/사용자 major id/현재 시간",  //받아올 내용이 있는 url
-        type: POST, //전송 방식(get/post)
+      	url: "http://localhost:8080/algorithm/mode1",  //받아올 내용이 있는 url
+        type: GET, //전송 방식(get/post)
         data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
@@ -37,15 +37,15 @@ $playtime=date('Y-m-d H:i:s');
           var minusScore = data;
           var database = trainerDB(minusScore, pmajor);
       	}
-        error: function(){
+        /*error: function(){
           //전송에 실패하면 실행될 코드
-        }
+        }*/
       });
     }
 
     /*DB에 데이터를 저장하고 불러오는 함수*/
     function trainerDB(minusScore, pmajor){
-      var triData = {"minus":minusScore, "targetUser":pmajor};
+      var triData = {"minus":minusScore, "pmajor":pmajor};
       $.ajax({
       	url: "t-database.php", //받아올 내용이 있는 url
         type: POST, //전송 방식(get/post)
@@ -60,9 +60,9 @@ $playtime=date('Y-m-d H:i:s');
           $(".score").html(score_result); //화면에 뿌리기
           $(".rank").html(rank_result);
       	}
-        error: function(){
+        /*error: function(){
           //전송에 실패하면 실행될 코드
-        }
+        }*/
       });
     }
 
@@ -77,6 +77,8 @@ $playtime=date('Y-m-d H:i:s');
         if(seconds==0){
           clearInterval(countdownTimer);
           document.getElementById('down').innerHTML = "start";
+
+          //1초마다 키넥트 서버의 mode1 콜
           var servertimer = setInterval('trainerServerCall(tmajor, pmajor, nowtime)', 1000);
         }
         else{
@@ -95,9 +97,9 @@ $playtime=date('Y-m-d H:i:s');
         <div class="resultshow">
           <p id="down" class="countdown">10</p>
           <p class="now">현재 순위</p>
-          <p class="rank"></p>
+          <p class="rank">1</p>
           <p class="now">내 점수</p>
-          <p class="score"></p>
+          <p class="score">100</p>
         </div>
         <div class="stopbtn">
           <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>"><input class="finish" type="button" value="중단하기"></a>

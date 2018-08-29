@@ -1,5 +1,16 @@
 <?php
 include('lock.php');
+
+$player=$row['id'];
+
+$is_sql = mysqli_query($db, "SELECT * from basicone WHERE id=$player");
+$is_row = mysqli_num_rows($is_sql);
+if($is_row == 1){
+  $player_sql=mysqli_query($db, "UPDATE basicone SET score=100 WHERE id=$player");
+}
+else{
+  $player_sql=mysqli_query($db, "INSERT INTO basicone(id, score, oldscore) VALUES($player, 100, null)");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -10,34 +21,54 @@ include('lock.php');
     <link href="css/basic.css" rel="stylesheet"></link>
     <script>
     var seconds = 9;
-    /*function trainerServerCall(tmajor, pmajor, nowtime){
-      var tmajor = this.tmajor;
-      var pmajor = this.pmajor;
-      var nowtime = this.nowtime;
+    var pmajor = "<?php echo $player_major; ?>";
+    var rmajor = "0000";
+    var tradingId = 1;
+    var timeline = 1;
+
+    /*키넥트 서버에서 mode1을 콜하는 함수*/
+    function basicServerCall(rmajor, pmajor, tradingId, timeline){
+      var allData = {"sourceUser":rmajor, "targetUser":pmajor, "tradingID":tradingId, "sourceDataNumber":timeline};
       $.ajax({
-        url: "http://localhost:8080/algorithm/mode1/ 트레이너 major id/사용자 major id/현재 시간",  //받아올 내용이 있는 url
-        type: POST, //전송 방식(get/post)
-        data: , //전송할 데이터
+      	url: "http://localhost:8080/algorithm/mode2",  //받아올 내용이 있는 url
+        type: GET, //전송 방식(get/post)
+        data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
-        cache: false,
-        success: function(data){ //data=[{minusScore:값}]
+      	cache: false,
+      	success: function(data){
           //전송에 성공하면 실행될 코드
-          var minusScore=data;
-          //받아온 내용을 처리할 부분
-          var score_result =
-          var rank_result =
-          $(".score").html(score_result);
-          $(".rank").html(rank_result);
-        }
-        error: function(){
+          var minusScore = data;
+          var database = basicDB(minusScore, pmajor);
+      	}
+        /*error: function(){
           //전송에 실패하면 실행될 코드
-        }
-      }); //1초에 한번씩 받아온다
-    }*/
-    function secondPassed(){//trainermajor, playermajor, playtime
-      //var tmajor = trainermajor;
-      //var pmajor = playermajor;
-      //var nowtime = playtime;
+        }*/
+      });
+      timeline++;
+    }
+
+    /*DB에 데이터를 저장하고 불러오는 함수*/
+    function basicDB(minusScore, pmajor){
+      var basData = {"minus":minusScore, "pmajor":pmajor};
+      $.ajax({
+      	url: "b1-database.php", //받아올 내용이 있는 url
+        type: POST, //전송 방식(get/post)
+        data: basData, //전송할 데이터
+        dataType: "json", //요청한 데이터 타입
+      	cache: false,
+      	success: function(data){ //score와 rank 받아오기
+          //전송에 성공하면 실행될 코드
+          var score_result = data.score;
+
+          $(".score").html(score_result); //화면에 뿌리기
+      	}
+        /*error: function(){
+          //전송에 실패하면 실행될 코드
+        }*/
+      });
+    }
+
+    function secondPassed(){
       var minutes = Math.round((seconds - 30)/60);
       var remainingSeconds = seconds % 60;
         /*if (remainingSeconds < 10) {
@@ -47,12 +78,15 @@ include('lock.php');
         if(seconds==0){
           clearInterval(countdownTimer);
           document.getElementById('down').innerHTML = "start";
-          //var servertimer = setInterval('trainerServerCall(tmajor, pmajor, nowtime)', 1000);
+
+          //1초마다 키넥트 서버의 mode2 콜
+          //var servertimer = setInterval('basicServerCall(rmajor, pmajor, tradingId, timeline)', 1000);
         }
         else{
           seconds--;
         }
       }
+
       var countdownTimer = setInterval('secondPassed()', 1000);
       </script>
   </head>
@@ -66,7 +100,7 @@ include('lock.php');
           <p class="rank"></p>-->
           <p id="down" class="countdown">10</p>
           <p class="now">내 점수</p>
-          <p class="score">90</p>
+          <p class="score">100</p>
         </div>
         <div class="stopbtn">
           <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
