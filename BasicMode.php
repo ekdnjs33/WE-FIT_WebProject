@@ -27,7 +27,7 @@ include('lock.php');
   </button>
   </p>
     <a href="Basic1.php" style="text-decoration: none;">
-      <div class="mode2"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
+      <div class="mode2" style="height: 100px; width: 700px;"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
       </div>
 
     </a>
