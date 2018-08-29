@@ -16,8 +16,14 @@ else{
 <html lang="en" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <meta content="stuff, to, help, search, engines, not" name="keywords">
+    <meta content="What this page is about." name="description">
+    <meta content="Display Webcam Stream" name="title">
+    <title>Display Webcam Stream</title>
     <title>ingUser</title>
     <script src="js/jquery.js"></script>
+    <script src="js/video.js"></script>
+    <link href="css/video.css" rel="stylesheet"></link>
     <link href="css/basic.css" rel="stylesheet"></link>
     <script>
     var seconds = 9;
@@ -106,7 +112,15 @@ else{
           <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
         </div>
       </div>
-      <div class="two3">사용자 영상</div>
+      <div class="two3">사용자 영상
+        <br>
+      <!--  <div class="container1">
+          <video autoplay="true" id="videoElement">
+
+          </video>
+        </div>
+-->
+      </div>
     </div>
   </body>
 </html>
