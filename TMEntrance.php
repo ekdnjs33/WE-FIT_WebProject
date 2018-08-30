@@ -69,7 +69,7 @@ $num=0;
       <div class="card-deck mb-3 text-center" style="padding-left: 92px;">
 
         <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f; ">
-          <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player</b></div>
+          <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player1</b></div>
           <div class="card-body">
              <img src="img/user-silhouette.png" style="width:100px; height:100px;"/>
              <br><br>
