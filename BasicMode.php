@@ -27,15 +27,12 @@ include('lock.php');
   </button>
   </p>
     <a href="Basic1.php" style="text-decoration: none;">
-      <div class="mode2" style="height: 100px; width: 700px;"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
+      <div class="mode2"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
       </div>
-
     </a>
-    <p align="right" style="margin-right: 20px;">
-      <button type="button" id="mymodal2" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal2">
+    <button type="button" id="mymodal2" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal2">
         <img src="img/white-question.png" style="width: 30px; height: 30px;"/>
     </button>
-    </p>
     <a href="Basic2.php" style="text-decoration: none;">
       <div class="mode2"><p style="margin-top:30px;"><b>기본 2 코스(Basic 2)</b></p>
       </div>
