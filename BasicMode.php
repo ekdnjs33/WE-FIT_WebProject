@@ -21,11 +21,12 @@ include('lock.php');
   </div>
   </a>
   <div id="bottom">
-  <p align="right" style="margin-right: 20px;">
+    <p align ="right" style="margin-right: 50px">
     <button type="button" id="mymodal" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal">
       <img src="img/white-question.png" style="width: 30px; height: 30px;"/>
-  </button>
+    </button>
   </p>
+<<<<<<< HEAD
     <a href="Basic1.php" style="text-decoration: none;">
       <div class="mode2"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
       </div>
@@ -35,29 +36,41 @@ include('lock.php');
     </button>
     <a href="Basic2.php" style="text-decoration: none;">
       <div class="mode2"><p style="margin-top:30px;"><b>기본 2 코스(Basic 2)</b></p>
+=======
+  <div id="container" align="center">
+  <a href="BMEntrance1.php" style="text-decoration: none;">
+   <div class="mode2" style="height: 180px;  width:1600px;"><p style="margin-top:70px;"><b>기본 1 코스(Basic 1)</b></p>
+   </div>
+  </a>
+
+    <a href="BMEntrance2.php" style="text-decoration: none;">
+      <div class="mode2" style="height: 180px; width:1600px;"><p style="margin-top:70px;"><b>기본 2 코스(Basic 2)</b></p>
+>>>>>>> 72eadb3d3111df80267457d7ab9554d2756f9bef
       </div>
     </a>
-    <p align="right" style="margin-right: 20px;">
-      <button type="button" id="mymodal3" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal3">
-        <img src="img/white-question.png" style="width: 30px; height: 30px;"/>
-    </button>
-    </p>
-    <a href="Basic3.php" style="text-decoration: none;">
-      <div class="mode2"><p style="margin-top:30px;"><b>기본 3 코스(Basic 3)</b></p>
+
+    <a href="BMEntrance3.php" style="text-decoration: none;">
+      <div class="mode2" style="height: 180px; width:1600px;"><p style="margin-top:70px;"><b>기본 3 코스(Basic 3)</b></p>
       </div>
     </a>
   </div>
+  </div>
+
   <!-- Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
 
-          <h4 class="modal-title" id="myModalLabel">기본1코스</h4>
+          <h4 class="modal-title" id="myModalLabel">기본코스 소개</h4>
           <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           기본 1코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
+          <br>
+          기본 2코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
+          <br>
+          기본 3코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff;" data-dismiss="modal">Close</button>
@@ -66,42 +79,7 @@ include('lock.php');
       </div>
     </div>
   </div>
-  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
 
-          <h4 class="modal-title" id="myModalLabel">기본2코스</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-            기본 2코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff;"  data-dismiss="modal">Close</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-
-          <h4 class="modal-title" id="myModalLabel">기본3코스</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-              기본 3코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff;" data-dismiss="modal">Close</button>
-
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 
 </html>
