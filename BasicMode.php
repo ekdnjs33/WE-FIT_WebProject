@@ -26,6 +26,17 @@ include('lock.php');
       <img src="img/white-question.png" style="width: 30px; height: 30px;"/>
     </button>
   </p>
+<<<<<<< HEAD
+    <a href="Basic1.php" style="text-decoration: none;">
+      <div class="mode2"><p style="margin-top:30px;"><b>기본 1 코스(Basic 1)</b></p>
+      </div>
+    </a>
+    <button type="button" id="mymodal2" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal2">
+        <img src="img/white-question.png" style="width: 30px; height: 30px;"/>
+    </button>
+    <a href="Basic2.php" style="text-decoration: none;">
+      <div class="mode2"><p style="margin-top:30px;"><b>기본 2 코스(Basic 2)</b></p>
+=======
   <div id="container" align="center">
   <a href="BMEntrance1.php" style="text-decoration: none;">
    <div class="mode2" style="height: 180px;  width:1600px;"><p style="margin-top:70px;"><b>기본 1 코스(Basic 1)</b></p>
@@ -34,6 +45,7 @@ include('lock.php');
 
     <a href="BMEntrance2.php" style="text-decoration: none;">
       <div class="mode2" style="height: 180px; width:1600px;"><p style="margin-top:70px;"><b>기본 2 코스(Basic 2)</b></p>
+>>>>>>> 72eadb3d3111df80267457d7ab9554d2756f9bef
       </div>
     </a>
 
