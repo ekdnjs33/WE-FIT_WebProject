@@ -7,6 +7,15 @@ $trainer=$_GET['trainer'];
 $player=$row['id'];
 $playtime=date('Y-m-d H:i:s');
 /*player_major 추가해야됨*/
+
+$is_sql = mysqli_query($db, "SELECT * FROM basicone WHERE id=$player");
+$is_row = mysqli_num_rows($is_sql);
+if($is_row == 1){
+  $player_sql=mysqli_query($db, "UPDATE basicone SET score=100 WHERE id=$player");
+}
+else{
+  $player_sql=mysqli_query($db, "INSERT INTO basicone(id, score, old_score) VALUES($player, 100, null)");
+}
 ?>
 <script>
 var wearable = 0;

@@ -2,15 +2,6 @@
 include('lock.php');
 
 $player=$row['id'];
-
-$is_sql = mysqli_query($db, "SELECT * from basicthree WHERE id=$player");
-$is_row = mysqli_num_rows($is_sql);
-if($is_row == 1){
-  $player_sql=mysqli_query($db, "UPDATE basicthree SET score=100 WHERE id=$player");
-}
-else{
-  $player_sql=mysqli_query($db, "INSERT INTO basicthree(id, score, oldscore) VALUES($player, 100, null)");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
