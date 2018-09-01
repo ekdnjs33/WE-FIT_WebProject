@@ -6,6 +6,7 @@ $roomidx=$_GET['roomidx'];
 $trainer=$_GET['trainer'];
 $player=$row['id'];
 $playtime=date('Y-m-d H:i:s');
+<<<<<<< HEAD
 /*player_major 추가해야됨*/
 
 $is_sql = mysqli_query($db, "SELECT * FROM basictwo WHERE id=$player");
@@ -16,20 +17,25 @@ if($is_row == 1){
 else{
   $player_sql=mysqli_query($db, "INSERT INTO basictwo(id, score, old_score) VALUES($player, 100, null)");
 }
+=======
+
+>>>>>>> b65f62313d2a5ead51532a7df28b5cf06a3bba01
 ?>
 <script>
 var wearable = 0;
 var kinect = 0;
 var pmajor = "<?php echo $player_major; ?>";
-var nowtime = "<?php echo $playtime; ?>";
 
+//1초마다 서버에서 wearable & kinect data call
+var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
+var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
 /*서버에서 wearable data 콜하는 함수*/
-function wearableServerCall(pmajor, nowtime){
-  var allData = {"User":pmajor, "now":nowtime};
+function wearableServerCall(pmajor){
+  var allData = {"userId":pmajor};
   $.ajax({
-    url: "http://14.49.37.187:8080/wearables",  //받아올 내용이 있는 url
-    type: GET, //전송 방식(get/post)
-    data: allData, //전송할 데이터
+    url: "http://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
+    type: "GET", //전송 방식(get/post)
+    //data: allData, //전송할 데이터
     dataType: "json", //요청한 데이터 타입
     cache: false,
     success: function(data){
@@ -40,12 +46,12 @@ function wearableServerCall(pmajor, nowtime){
   });
 }
 /*서버에서 kinect data 콜하는 함수*/
-function kinectServerCall(pmajor, nowtime){
-  var allData = {"User":pmajor, "now":nowtime};
+function kinectServerCall(pmajor){
+  var allData = {"userId":pmajor};
   $.ajax({
-    url: "http://14.49.37.187:8080/joints",  //받아올 내용이 있는 url
-    type: GET, //전송 방식(get/post)
-    data: allData, //전송할 데이터
+    url: "http://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
+    type: "GET", //전송 방식(get/post)
+    //data: allData, //전송할 데이터
     dataType: "json", //요청한 데이터 타입
     cache: false,
     success: function(data){
@@ -62,25 +68,14 @@ function changeWearableIcon(wearable){
   if(wearable==1){
       clearInterval(wearableServerTimer);
       document.getElementById('wIcon').innerHTML = "<img src='img/checked.png' style='width:20px; height:20px;'/>";
-      /*icon으로 바꾸는거 손 보기*/
-  }
-  else{
-    //1초마다 서버에서 wearable data 콜
-    var wearableServerTimer = setInterval('wearableServerCall(pmajor, nowtime)', 1000);
-  }
-
-  }
+     }
+ }
 
   /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
   function changeKinectIcon(kinect){
     if(kinect==1){
         clearInterval(kinectServerTimer);
         document.getElementById('kIcon').innerHTML ="<img src='img/checked.png' style='width:20px; height:20px;'/>";
-        /*icon으로 바꾸는거 손 보기*/
-      }
-    else{
-        //1초마다 서버에서 kinect data 콜
-        var kinectServerTimer = setInterval('kinectServerCall(pmajor, nowtime)', 1000);
       }
     }
 
@@ -88,10 +83,9 @@ function changeWearableIcon(wearable){
 <!doctype html>
 <html>
 <head>
-  <!--5초마다 방 목록 새로고침-->
-  <meta http-equiv=refresh content='5; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - StayMode</title>
+  <script src="js/jquery.js"></script>
   <link href="css/trainermode.css" rel="stylesheet"></link>
   <link href="bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
 </head>
