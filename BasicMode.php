@@ -6,7 +6,6 @@ include('lock.php');
 <head>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - BasicMode</title>
-  <title>WE FIT - TrainerMode</title>
   <link href="css/basicmode.css" rel="stylesheet"></link>
   <link href="bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
   <script src="js/popup.js"></script>

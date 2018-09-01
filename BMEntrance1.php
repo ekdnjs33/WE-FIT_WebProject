@@ -6,7 +6,6 @@ $roomidx=$_GET['roomidx'];
 $trainer=$_GET['trainer'];
 $player=$row['id'];
 $playtime=date('Y-m-d H:i:s');
-<<<<<<< HEAD
 /*player_major 추가해야됨*/
 
 $is_sql = mysqli_query($db, "SELECT * FROM basicone WHERE id=$player");
@@ -17,9 +16,6 @@ if($is_row == 1){
 else{
   $player_sql=mysqli_query($db, "INSERT INTO basicone(id, score, old_score) VALUES($player, 100, null)");
 }
-=======
-
->>>>>>> b65f62313d2a5ead51532a7df28b5cf06a3bba01
 ?>
 <script>
 var wearable = 0;
@@ -62,7 +58,6 @@ function kinectServerCall(pmajor){
   });
 }
 
-
 /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
 function changeWearableIcon(wearable){
   if(wearable==1){
@@ -92,7 +87,7 @@ function changeWearableIcon(wearable){
 
 <body style="margin:8px; background:#f5c94c">
   <div id="top">
-    <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>" style="text-decoration: none; color:black;">
+    <a href="BasicMode.php" style="text-decoration: none; color:black;">
     <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
     <!--<span align="center" style=" font-size:18pt; margin-left:190px;">키넥트 센서와 웨어러블 기기의 블루투스를 연결해주세요!</span>-->
     <a href="Basic1.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>

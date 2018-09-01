@@ -8,7 +8,7 @@ $minus=$value['minus'];
 $pmajor=$value['pmajor'];
 
 //수강생의 major에 따른 현재 저장된  id를 가져옴
-$db_sql=mysqli_query($db, "SELECT * FROM  basicthree, users WHERE basicone.id=users.id AND major='".$pmajor."'");
+$db_sql=mysqli_query($db, "SELECT * FROM  basicthree, users WHERE basictwo.id=users.id AND major='".$pmajor."'");
 
 $row=mysqli_fetch_array($db_sql);
 $score=$row['score'];
