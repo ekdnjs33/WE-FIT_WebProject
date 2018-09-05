@@ -25,19 +25,24 @@ var pmajor = "<?php echo $player_major; ?>";
 //1초마다 서버에서 wearable & kinect data call
 var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
 var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+
+
 /*서버에서 wearable data 콜하는 함수*/
 function wearableServerCall(pmajor){
   var allData = {"userId":pmajor};
   $.ajax({
     url: "http://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
     type: "GET", //전송 방식(get/post)
+    async: false,
     //data: allData, //전송할 데이터
     dataType: "json", //요청한 데이터 타입
     cache: false,
-    success: function(data){
-      //전송에 성공하면 실행될 코드
-      wearable = 1;
-      changeWearableIcon(wearable);
+    success: function(data){  //전송에 성공하면 실행될 코드
+
+      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        wearable = 1;
+        changeWearableIcon(wearable);
+      }
     }
   });
 }
@@ -47,13 +52,15 @@ function kinectServerCall(pmajor){
   $.ajax({
     url: "http://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
     type: "GET", //전송 방식(get/post)
+    async: false,
     //data: allData, //전송할 데이터
     dataType: "json", //요청한 데이터 타입
     cache: false,
-    success: function(data){
-      //전송에 성공하면 실행될 코드
-      kinect = 1;
-      changeKinectIcon(kinect);
+    success: function(data){ //전송에 성공하면 실행될 코드
+      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        kinect = 1;
+        changeKinectIcon(kinect);
+      }
     }
   });
 }
