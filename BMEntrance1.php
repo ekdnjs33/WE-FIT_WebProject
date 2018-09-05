@@ -87,8 +87,8 @@ function changeWearableIcon(wearable){
 
 <body style="margin:8px; background:#f5c94c">
   <div id="top">
-    <a href="BasicMode.php" style="text-decoration: none; color:black;">
-    <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
+    <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
+    <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"> 기본 1코스(Basic 1)</a> <!--기본 1코스(Basic 1)로 변경 다원-->
     <!--<span align="center" style=" font-size:18pt; margin-left:190px;">키넥트 센서와 웨어러블 기기의 블루투스를 연결해주세요!</span>-->
     <a href="Basic1.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
   </div>
@@ -97,7 +97,7 @@ function changeWearableIcon(wearable){
 
     <div class="container" align="center">
 <center>
-      <div class="card-deck mb-3 text-center" style="padding-left:150px;">
+      <div class="card-deck mb-3 text-center" style="margin-top:50px; padding-left:150px;"> <!--margin-top추가 다원-->
         <div class="card border-wefit mb-3" style="max-width: 400px ; height: 500px; border:4px solid #813f7f;">
           <div class="card-header bg-transparent border-wefit text-wefit text-center"><h4><b>코스명</b></h4></div>
           <div class="card-body">
@@ -114,7 +114,7 @@ function changeWearableIcon(wearable){
         <div class="card border-wefit mb-3" style="max-width: 400px; height: 500px; border:4px solid #813f7f;">
           <div class="card-header bg-transparent border-wefit text-wefit text-center"><h4><b>Player</b></h4></div>
           <div class="card-body">
-             <img src="img/user-silhouette.png" style="width:200px; height:200px;"/>
+             <img src="img/user-silhouette.png" style="margin-top: 60px; width:200px; height:200px;"/> <!--margin-top추가 다원-->
              <br><br>
             <h5 class="card-title">
               <?php
