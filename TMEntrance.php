@@ -15,6 +15,71 @@ if($login_session == $trainer){
 $list=[];
 $num=0;
 ?>
+<script>
+var wearable = 0;
+var kinect = 0;
+var pmajor = "<?php echo $player_major; ?>";
+
+//1초마다 서버에서 wearable & kinect data call
+var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
+var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+
+
+/*서버에서 wearable data 콜하는 함수*/
+function wearableServerCall(pmajor){
+  var allData = {"userId":pmajor};
+  $.ajax({
+    url: "http://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
+    type: "GET", //전송 방식(get/post)
+    async: false,
+    //data: allData, //전송할 데이터
+    dataType: "json", //요청한 데이터 타입
+    cache: false,
+    success: function(data){  //전송에 성공하면 실행될 코드
+
+      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        wearable = 1;
+        changeWearableIcon(wearable);
+      }
+    }
+  });
+}
+/*서버에서 kinect data 콜하는 함수*/
+function kinectServerCall(pmajor){
+  var allData = {"userId":pmajor};
+  $.ajax({
+    url: "http://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
+    type: "GET", //전송 방식(get/post)
+    async: false,
+    //data: allData, //전송할 데이터
+    dataType: "json", //요청한 데이터 타입
+    cache: false,
+    success: function(data){ //전송에 성공하면 실행될 코드
+      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        kinect = 1;
+        changeKinectIcon(kinect);
+      }
+    }
+  });
+}
+
+/*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
+function changeWearableIcon(wearable){
+  if(wearable==1){
+      clearInterval(wearableServerTimer);
+      document.getElementById('wIcon').innerHTML = "<img src='img/checked.png' style='width:20px; height:20px;'/>";
+     }
+ }
+
+  /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
+  function changeKinectIcon(kinect){
+    if(kinect==1){
+        clearInterval(kinectServerTimer);
+        document.getElementById('kIcon').innerHTML ="<img src='img/checked.png' style='width:20px; height:20px;'/>";
+      }
+    }
+
+  </script>
 <!doctype html>
 <html>
 <head>
@@ -22,6 +87,7 @@ $num=0;
   <meta http-equiv=refresh content='3; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - StayMode</title>
+  <script src="js/jquery.js"></script>
   <link href="css/trainermode.css" rel="stylesheet"></link>
   <link href="bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
 </head>
@@ -59,8 +125,13 @@ $num=0;
         ?>
       </h5>
     </div>
-    <div class="card-footer bg-transparent border-wefit"><b>Wearables <img src="img/checked.png" style="width:20px; height:20px;"/>
-      &nbsp Kinect <img src="img/checked.png" style="width:20px; height:20px;"/>  </b></div>
+    <div class="card-footer bg-transparent border-wefit">
+      <b>Wearables </b>
+      <span id="wIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+      &nbsp
+      <b>Kinect</b>
+      <span id="kIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+    </div>
   </div>
 </div>
 
@@ -79,8 +150,13 @@ $num=0;
               ?>
             </h5>
           </div>
-          <div class="card-footer bg-transparent border-wefit"><b>Wearables <img src="img/checked.png" style="width:20px; height:20px;"/>
-            &nbsp Kinect <img src="img/checked.png" style="width:20px; height:20px;"/>  </b></div>
+          <div class="card-footer bg-transparent border-wefit">
+            <b>Wearables </b>
+            <span id="wIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+            &nbsp
+            <b>Kinect</b>
+            <span id="kIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+          </div>
         </div>
 
         <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
@@ -94,8 +170,13 @@ $num=0;
               ?>
             </h5>
           </div>
-          <div class="card-footer bg-transparent border-wefit"><b>Wearables <img src="img/checked.png" style="width:20px; height:20px;"/>
-            &nbsp Kinect <img src="img/checked.png" style="width:20px; height:20px;"/>  </b></div>
+          <div class="card-footer bg-transparent border-wefit">
+            <b>Wearables </b>
+            <span id="wIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+            &nbsp
+            <b>Kinect</b>
+            <span id="kIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+          </div>
         </div>
 
         <div class="card border-wefit mb-3" style="max-width: 18rem;border:4px solid #813f7f;">
@@ -109,8 +190,13 @@ $num=0;
               ?>
             </h5>
           </div>
-          <div class="card-footer bg-transparent border-wefit"><b>Wearables <img src="img/checked.png" style="width:20px; height:20px;"/>
-            &nbsp Kinect <img src="img/checked.png" style="width:20px; height:20px;"/>  </b></div>
+          <div class="card-footer bg-transparent border-wefit">
+            <b>Wearables </b>
+            <span id="wIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+            &nbsp
+            <b>Kinect</b>
+            <span id="kIcon"><img src="img/close.png" style="width:20px; height:20px;"/></span>
+          </div>
         </div>
 
     </div>
