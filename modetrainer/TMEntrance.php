@@ -103,7 +103,12 @@ else{
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드
-      //alert(JSON.stringify(response));
+        //alert(JSON.stringify(response));
+        $("#Trainer").html("-");
+        $("#Player1").html("-");
+        $("#Player2").html("-");
+        $("#Player3").html("-");
+
         for(i = 0; i < response.length; i++){
           var checkT_result = response[i].checkT;
           var player_result = response[i].email;
@@ -140,9 +145,9 @@ else{
       <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
         <div class="card-header bg-transparent border-wefit text-wefit text-center "><img src="../img/crown.png" style="width:20px; height:20px;"/>&nbsp<b>Trainer</b>&nbsp<img src="../img/crown.png" style="width:20px; height:20px;"/></div>
         <div class="card-body">
-          <img src="../img/user-silhouette.png" style="width:100px; height:100px;"/>
-          <br><br>
-          <h5 id="Trainer" class="card-title"></h5>
+          <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+          <br>
+          <h5 id="Trainer" class="card-title">-</h5>
         </div>
         <div class="card-footer bg-transparent border-wefit">
           <b>Wearables </b>
@@ -161,9 +166,9 @@ else{
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f; ">
             <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player1</b></div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;"/>
-              <br><br>
-              <h5 id="Player1" class="card-title"></h5>
+              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <br>
+              <h5 id="Player1" class="card-title">-</h5>
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
@@ -177,9 +182,9 @@ else{
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
             <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player2</b></div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;"/>
-              <br><br>
-              <h5 id="Player2" class="card-title"></h5>
+              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <br>
+              <h5 id="Player2" class="card-title">-</h5>
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
@@ -193,9 +198,9 @@ else{
           <div class="card border-wefit mb-3" style="max-width: 18rem;border:4px solid #813f7f;">
             <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player3</b></div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;"/>
-              <br><br>
-              <h5 id="Player3" class="card-title"></h5>
+              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <br>
+              <h5 id="Player3" class="card-title">-</h5>
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
