@@ -1,5 +1,5 @@
 <?php
-include('lock.php');
+include('../lock.php');
 
 $number=0; //방 번호
 ?>
@@ -10,22 +10,13 @@ $number=0; //방 번호
   <meta http-equiv=refresh content='3; url='>
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - TrainerMode</title>
-  <script src="js/jquery.js"></script>
-  <script>
-  /*$(function(){
-    $(".enter").hover(function(){
-      $(".enter").css({"color":"white"});},
-      function(){
-      $(".enter").css({"color":"black"});
-      });
-  });*/
-  </script>
-  <link href="css/trainermode.css" rel="stylesheet"></link>
+  <script src="../js/jquery.js"></script>
+  <link href="../css/trainermode.css" rel="stylesheet"></link>
 </head>
 <body>
   <div id="top">
-    <a href="SelectMode.php">
-    <br><img src="logo.png" alt="we fit 로고" width="7%" align="center"> 트레이너 모드입니다!</a>
+    <a href="../SelectMode.php">
+    <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 트레이너 모드입니다!</a>
     <p align="right" style="margin-top:20px; margin-right:70px"><a href="CreateRoom.php"><input class="make" type="button" value="방 생성하기"/></a></p>
     <!--<p align="right" style="margin-right:70px"><input type="search">
     <input type="submit" value="검색"></p>-->
@@ -48,12 +39,12 @@ $number=0; //방 번호
           <td>생성시간</td>
         </tr>
       <thead>
-      <?php $sql=mysqli_query($db, "SELECT * FROM triroom ORDER BY idx DESC LIMIT 0,7");
-      while($board=mysqli_fetch_array($sql)){
-        $title=$board['title'];
-        $idx=$board['idx'];
-        $trainer=$board['createrid'];
-        $number+=1;
+      <?php $sql = mysqli_query($db, "SELECT * FROM triroom ORDER BY idx DESC LIMIT 0,7");
+      while($board = mysqli_fetch_array($sql)){
+        $title = $board['title'];
+        $idx = $board['idx'];
+        $trainer = $board['createrid'];
+        $number += 1;
       ?>
       <tbody>
         <tr>

@@ -1,26 +1,28 @@
 <?php
-include('lock.php');
+include('../lock.php');
 
-$roomtitle=$_GET['roomtitle'];
-$roomidx=$_GET['roomidx'];
-$trainer=$_GET['trainer'];
+$roomtitle = $_GET['roomtitle'];
+$roomidx = $_GET['roomidx'];
+$trainer = $_GET['trainer'];
 
-$major_sql=mysqli_query($db, "SELECT * FROM users WHERE email='".$trainer."'");
-$major_row=mysqli_fetch_array($major_sql);
-$trainer_major=$major_row['major'];
-
+$major_sql = mysqli_query($db, "SELECT * FROM users WHERE email = '".$trainer."'");
+$major_row = mysqli_fetch_array($major_sql);
+$trainer_major = $major_row['major'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-    <title>ingUser</title>
-    <script src="js/jquery.js"></script>
-    <link href="css/inguser.css" rel="stylesheet"></link>
+    <title>WE FIT - Playing</title>
+    <script src="../js/jquery.js"></script>
+    <link href="../css/inguser.css" rel="stylesheet"></link>
     <script>
     var seconds = 9;
     var pmajor = "<?php echo $player_major; ?>";
     var tmajor = "<?php echo $trainer_major; ?>";
+
+    //1초 마다 카운트다운 함수 실행
+    var countdownTimer = setInterval('secondPassed()', 1000);
 
     /*실시간 날짜와 시간을 받아오는 함수*/
     function getFormatDate(date){
@@ -50,19 +52,14 @@ $trainer_major=$major_row['major'];
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){
-          //전송에 성공하면 실행될 코드
           var minusScore = data;
           var database = trainerDB(minusScore, pmajor);
       	}
-        /*error: function(){
-          //전송에 실패하면 실행될 코드
-        }*/
       });
     }
-
     /*DB에 데이터를 저장하고 불러오는 함수*/
     function trainerDB(minusScore, pmajor){
-      var triData = {"minus":minusScore, "pmajor":pmajor};
+      var triData = {"minus": minusScore, "pmajor": pmajor};
       $.ajax({
       	url: "t-database.php", //받아올 내용이 있는 url
         type: "POST", //전송 방식(get/post)
@@ -70,19 +67,14 @@ $trainer_major=$major_row['major'];
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){ //score와 rank 받아오기
-          //전송에 성공하면 실행될 코드
           var score_result = data.score;
           var rank_result = data.rank;
 
           $(".score").html(score_result); //화면에 뿌리기
           $(".rank").html(rank_result);
       	}
-        /*error: function(){
-          //전송에 실패하면 실행될 코드
-        }*/
       });
     }
-
     /*카운트다운 함수*/
     function secondPassed(){
       var minutes = Math.round((seconds - 30)/60);
@@ -90,21 +82,19 @@ $trainer_major=$major_row['major'];
         /*if (remainingSeconds < 10) {
             remainingSeconds = "0" + remainingSeconds;
         }*/
-        document.getElementById('down').innerHTML = remainingSeconds;
-        if(seconds==0){
-          clearInterval(countdownTimer);
-          document.getElementById('down').innerHTML = "start";
+      document.getElementById('down').innerHTML = remainingSeconds;
+      if(seconds == 0){
+        clearInterval(countdownTimer);
+        document.getElementById('down').innerHTML = "start";
 
-          //1초마다 키넥트 서버의 mode1 콜
-          var servertimer = setInterval('trainerServerCall(tmajor, pmajor)', 1000);
-        }
-        else{
-          seconds--;
-        }
+        //1초마다 키넥트 서버의 mode1 콜
+        var servertimer = setInterval('trainerServerCall(tmajor, pmajor)', 1000);
       }
-
-      var countdownTimer = setInterval('secondPassed()', 1000);
-      </script>
+      else{
+        seconds--;
+      }
+    }
+    </script>
   </head>
   <body>
     <div class="wrapper">
