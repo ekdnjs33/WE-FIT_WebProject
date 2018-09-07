@@ -39,12 +39,12 @@ else{
 
   var isplayerTimer = setInterval('isplayer(roomidx, playerid)', 100);
   //1초마다 서버에서 wearable & kinect data call
-  var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
+  //var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
   //var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
 
   /*서버에서 wearable data 콜하는 함수*/
   function wearableServerCall(pmajor){
-    var allData = {"userId": pmajor};
+    //var allData = {"userId": pmajor};
     $.ajax({
       url: "http://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
@@ -53,7 +53,7 @@ else{
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(data){  //전송에 성공하면 실행될 코드
-        if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
           wearable = 1;
           changeWearableIcon(wearable);
         }
@@ -62,7 +62,7 @@ else{
   }
   /*서버에서 kinect data 콜하는 함수*/
   function kinectServerCall(pmajor){
-    var allData = {"userId": pmajor};
+    //var allData = {"userId": pmajor};
     $.ajax({
       url: "http://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
@@ -71,7 +71,7 @@ else{
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(data){ //전송에 성공하면 실행될 코드
-        if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
           kinect = 1;
           changeKinectIcon(kinect);
         }
@@ -94,12 +94,12 @@ else{
   }
   /*방에 들어온 여부에 따라 화면에 표시하는 함수*/
   function isplayer(roomidx, playerid){
-    var playData = {"roomidx": roomidx, "playerid": playerid};
+    //var playData = {"roomidx": roomidx, "playerid": playerid};
     $.ajax({
       url: "isplayer.php?roomidx="+roomidx+"&playerid="+playerid, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
-      data: playData,
+      //data: playData,
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드

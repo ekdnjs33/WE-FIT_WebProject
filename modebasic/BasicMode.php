@@ -21,23 +21,23 @@ include('../lock.php');
     </a>
 
     <div id="bottom">
-      <p align ="right" style="margin-right: 50px">
-        <button type="button" id="mymodal" class="btn btn-lg" style="background-color:#813f7f; "data-toggle="modal" data-target="#myModal">
+      <p align ="right" style="margin-right:15px">
+        <button type="button" id="mymodal" class="btn btn-lg" style="background-color:#813f7f;" data-toggle="modal" data-target="#myModal">
           <img src="../img/white-question.png" style="width: 30px; height: 30px;"/>
         </button>
       </p>
 
       <div id="container" align="center">
         <a href="BMEntrance1.php" style="text-decoration: none;">
-          <div class="mode2" style="height: 180px;  width:1600px;"><p style="margin-top:70px;"><b>기본 1 코스(Basic 1)</b></p>
+          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 1 코스(Basic 1)</p>
           </div>
         </a>
         <a href="BMEntrance2.php" style="text-decoration: none;">
-          <div class="mode2" style="height: 180px; width:1600px;"><p style="margin-top:70px;"><b>기본 2 코스(Basic 2)</b></p>
+          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 2 코스(Basic 2)</p>
           </div>
         </a>
         <a href="BMEntrance3.php" style="text-decoration: none;">
-          <div class="mode2" style="height: 180px; width:1600px;"><p style="margin-top:70px;"><b>기본 3 코스(Basic 3)</b></p>
+          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 3 코스(Basic 3)</p>
           </div>
         </a>
       </div>

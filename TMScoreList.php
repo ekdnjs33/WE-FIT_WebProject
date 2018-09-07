@@ -1,3 +1,9 @@
+<?php
+include('lock.php');
+
+$roomtitle = $_GET['roomtitle'];
+$roomidx = $_GET['roomidx'];
+?>
 <!doctype html>
 <html>
   <head>
@@ -9,8 +15,7 @@
   <body style="background:#f5c94c; font-family: '210 데이라잇';">
     <div id="top">
       <a href="SelectMode.php" style="text-decoration: none; color:black;"> <!--style추가 다원-->
-        <br>
-        <img src="logo.png" alt="we fit 로고" width="7%" align="center"/> wefit팀 화이팅!!!
+        <br><img src="img/logo.png" alt="we fit 로고" width="7%" align="center"/><?php echo " $roomtitle"; ?>
       </a>
     </div>
 
@@ -28,29 +33,30 @@
               <th scope="col">누적 점수</th>
             </tr>
           </thead>
+          <?php $sql = mysqli_query($db, "SELECT email, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score AND idx = $roomidx AND checkT != 0) AS rank FROM player AS b, users WHERE b.id = users.id ORDER BY rank ASC");
+          while($board = mysqli_fetch_array($sql)){
+            $p_id = $board['email'];
+            $p_score = $board['score'];
+            $p_rank = $board['rank'];
+          ?>
           <tbody>
             <tr>
-              <th scope="row"><img src="img/gold-medal.png" style="width: 30px; height: 30px;"/>1</th>
-              <td>Mark</td>
-              <td>90</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>85</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>50</td>
-              <td>@twitter</td>
+              <th scope="row"><img src="img/gold-medal.png" style="width: 30px; height: 30px;"/><?php echo $rank; ?></th>
+              <td><?php echo $p_id; ?></td>
+              <td><?php echo $p_score; ?></td>
+              <td><?php echo $p_score; ?></td>
             </tr>
           </tbody>
+          <?php } ?>
         </table>
+        <?php $rank_sql = mysqli_query($db, "SELECT idx, id, checkT, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score AND idx = $roomidx) AS rank FROM player AS b WHERE id = $login_session ORDER BY rank ASC");
+
+        $rank_row = mysqli_fetch_array($rank_sql);
+        $r_score = $rank_row['score'];
+        $r_rank = $rank_row['rank'];
+        ?>
         <br>
-        <h4>나의 점수는 90점 , 순위는 1위입니다!</h4> <!--h5~>h4변경 다원-->
+        <h4>나의 점수는 <?php echo $r_score; ?>점 , 순위는 <?php echo $r_rank-1; ?>위입니다!</h4> <!--h5~>h4변경 다원-->
       </div>
 
     </div>
