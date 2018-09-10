@@ -4,8 +4,18 @@
     height: 375px;
     border: 10px #333 solid;
 }
-#videoElement {
-    width: 500px;
-    height: 375px;
+#videoElement1 {
+    width: 640px;
+    height: 480px;
+    background-color: #666;
+}
+#videoElement2 {
+    width: 640px;
+    height: 480px;
+    background-color: #666;
+}
+#videoElement3 {
+    width: 640px;
+    height: 480px;
     background-color: #666;
 }

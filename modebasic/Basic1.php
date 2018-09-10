@@ -9,14 +9,13 @@ $player=$row['id'];
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <meta content="stuff, to, help, search, engines, not" name="keywords">
     <meta content="What this page is about." name="description">
-    <meta content="Display Webcam Stream" name="title">
-    <title>Display Webcam Stream</title>
+    <meta content="WE FIT - Playing" name="title">
     <title>WE FIT - Playing</title>
     <script src="../js/jquery.js"></script>
-    <script src="../js/video.js"></script>
     <link href="../css/video.css" rel="stylesheet"></link>
     <link href="../css/basic.css" rel="stylesheet"></link>
     <script>
+
     var seconds = 9;
     var pmajor = "<?php echo $player_major; ?>";
     var rmajor = "0000";
@@ -75,11 +74,19 @@ $player=$row['id'];
         }
       }
     </script>
+
   </head>
   <body>
     <div class="wrapper">
       <div class="one">10초 후에 운동을 시작합니다.</div>
-      <div class="two1">참조 영상</div>
+      <div class="two1">참조 영상
+        <br><br><br><br><br>
+
+        <video autoplay muted id="sampleMovie" src="../img/sample.mp4" style="width:640px; height:480px;" controls>
+        </video>
+
+      </div>
+
       <div class="two2">
         <div class="resultshow">
           <!--<p class="now"></p>
@@ -93,13 +100,25 @@ $player=$row['id'];
         </div>
       </div>
       <div class="two3">사용자 영상
-        <br>
-    <!--<div class="container1">
-          <video autoplay="true" id="videoElement">
+        <br><br><br><br><br>
+        <video autoplay="true" id="videoElement1">
 
-          </video>
-        </div>-->
+        </video>
+
       </div>
+      <script>
+      var video = document.querySelector("#videoElement1");
+
+      if(navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(function(stream){
+          video.srcObject = stream;
+        })
+        .catch(function(err0r) {
+          console.log("Something went wrong!");
+        });
+      }
+      </script>
     </div>
   </body>
 </html>
