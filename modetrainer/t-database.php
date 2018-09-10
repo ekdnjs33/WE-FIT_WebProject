@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config.php');
 
 $json_data = $_POST['triData'];
 $value = json_decode(stripcslashes($json_data));

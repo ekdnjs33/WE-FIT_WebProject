@@ -1,13 +1,13 @@
 <?php
-include('lock.php');
+include('../lock.php');
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <title>WE FIT - CreateRoom</title>
-    <link href="css/createroom.css" rel="stylesheet"></link>
-    <script src="js/jquery.js"></script>
+    <link href="../css/createroom.css" rel="stylesheet"></link>
+    <script src="../js/jquery.js"></script>
   </head>
   <body>
     <center>
