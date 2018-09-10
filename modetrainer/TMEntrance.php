@@ -54,6 +54,7 @@ else{
       cache: false,
       success: function(data){  //전송에 성공하면 실행될 코드
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+
           sensor = 1;
           changeWearableIcon(sensor ,pmajor);
         }
@@ -81,7 +82,7 @@ else{
   /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
   function changeWearableIcon(sensor, pmajor){
     $.ajax({
-      url: "checksensor.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
       //data: playData,
@@ -109,7 +110,7 @@ else{
   /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
   function changeKinectIcon(sensor, pmajor){
     $.ajax({
-      url: "checksensor.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      url: "checkkinect.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
       //data: playData,
