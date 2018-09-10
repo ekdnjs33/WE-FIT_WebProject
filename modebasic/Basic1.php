@@ -82,7 +82,7 @@ $player=$row['id'];
       <div class="two1">참조 영상
         <br><br><br><br><br>
 
-        <video autoplay muted id="sampleMovie" src="../img/sample.mp4" style="width:640px; height:480px;" controls>
+        <video autoplay id="sampleMovie" src="../img/sample.mp4" style="width:640px; height:480px;" controls>
         </video>
 
       </div>
