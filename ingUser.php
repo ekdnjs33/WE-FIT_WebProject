@@ -8,7 +8,7 @@ $trainer=$_GET['trainer'];
 $major_sql=mysqli_query($db, "SELECT * FROM users WHERE email='".$trainer."'");
 $major_row=mysqli_fetch_array($major_sql);
 $trainer_major=$major_row['major'];
-
+$playtime=date('Y-m-d H:i:s');
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -21,32 +21,15 @@ $trainer_major=$major_row['major'];
     var seconds = 9;
     var pmajor = "<?php echo $player_major; ?>";
     var tmajor = "<?php echo $trainer_major; ?>";
+    var nowtime = "<?php echo $playtime; ?>";
 
-    /*실시간 날짜와 시간을 받아오는 함수*/
-    function getFormatDate(date){
-      var year = date.getFullYear();
-      var mon = (1+date.getMonth());
-      mon = mon>=10?mon:'0'+mon;
-      var day = date.getDate();
-      day = day>=10?day:'0'+day;
-      var hour = date.getHours();
-      hour = hour>=10?hour:'0'+hour;
-      var min = date.getMinutes();
-      min = min>=10?min:'0'+min;
-      var sec = date.getSeconds();
-      sec = sec>=10?sec:'0'+sec;
-
-      return year+"-"+mon+"-"+day+" "+hour+":"+min+":"+sec;
-    }
     /*키넥트 서버에서 mode1을 콜하는 함수*/
-    function trainerServerCall(tmajor, pmajor){
-      var d = new Date();
-      nowtime = getFormatDate(d);
-      var allData = {tmajor, pmajor, nowtime};
+    function trainerServerCall(tmajor, pmajor, nowtime){
+      var allData = {"sourceUser":tmajor, "targetUser":pmajor, "now":nowtime};
       $.ajax({
-      	url: "http://14.49.37.187:8080/algorithm/mode1/"+tmajor+"/"+pmajor+"/"+nowtime,  //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
-        //data: allData, //전송할 데이터
+      	url: "http://localhost:8080/algorithm/mode1",  //받아올 내용이 있는 url
+        type: GET, //전송 방식(get/post)
+        data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){
@@ -65,7 +48,7 @@ $trainer_major=$major_row['major'];
       var triData = {"minus":minusScore, "pmajor":pmajor};
       $.ajax({
       	url: "t-database.php", //받아올 내용이 있는 url
-        type: "POST", //전송 방식(get/post)
+        type: POST, //전송 방식(get/post)
         data: triData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
@@ -96,7 +79,7 @@ $trainer_major=$major_row['major'];
           document.getElementById('down').innerHTML = "start";
 
           //1초마다 키넥트 서버의 mode1 콜
-          var servertimer = setInterval('trainerServerCall(tmajor, pmajor)', 1000);
+          var servertimer = setInterval('trainerServerCall(tmajor, pmajor, nowtime)', 1000);
         }
         else{
           seconds--;

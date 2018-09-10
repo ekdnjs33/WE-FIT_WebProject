@@ -37,7 +37,7 @@ function wearableServerCall(pmajor){
     cache: false,
     success: function(data){  //전송에 성공하면 실행될 코드
 
-      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+      if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
         wearable = 1;
         changeWearableIcon(wearable);
       }
@@ -55,7 +55,8 @@ function kinectServerCall(pmajor){
     dataType: "json", //요청한 데이터 타입
     cache: false,
     success: function(data){ //전송에 성공하면 실행될 코드
-      if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+      if(data.length > 0 ){
+        //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
         kinect = 1;
         changeKinectIcon(kinect);
       }
@@ -66,16 +67,18 @@ function kinectServerCall(pmajor){
 /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
 function changeWearableIcon(wearable){
   if(wearable==1){
-      clearInterval(wearableServerTimer);
+
       document.getElementById('wIcon').innerHTML = "<img src='img/checked.png' style='width:20px; height:20px;'/>";
+      clearInterval(wearableServerTimer);
      }
  }
 
   /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
   function changeKinectIcon(kinect){
     if(kinect==1){
-        clearInterval(kinectServerTimer);
-        document.getElementById('kIcon').innerHTML ="<img src='img/checked.png' style='width:20px; height:20px;'/>";
+
+       document.getElementById('kIcon').innerHTML ="<img src='img/checked.png' style='width:20px; height:20px;'/>";
+       clearInterval(kinectServerTimer);
       }
     }
 
@@ -84,7 +87,7 @@ function changeWearableIcon(wearable){
 <html>
 <head>
   <!--3초마다 방 목록 새로고침-->
-  <meta http-equiv=refresh content='3; url='>
+  <!--<meta http-equiv=refresh content='3; url='>-->
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <title>WE FIT - StayMode</title>
   <script src="js/jquery.js"></script>

@@ -58,6 +58,7 @@ function kinectServerCall(pmajor){
     cache: false,
     success: function(data){ //전송에 성공하면 실행될 코드
       if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        alert(data.userId);
         kinect = 1;
         changeKinectIcon(kinect);
       }
