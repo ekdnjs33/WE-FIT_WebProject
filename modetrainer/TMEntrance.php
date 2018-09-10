@@ -9,14 +9,14 @@ $player = $row['id'];
 
 //방에 들어온 사람에게 순서대로 번호 부여하기(이름이나 센서 연결 표시시 사용하기 위해)
 if($login_session == $trainer){
-  $trainer_sql = mysqli_query($db, "INSERT INTO player(idx, id, checkT, score) VALUES($roomidx, $player, 0, 100)");
+  $trainer_sql = mysqli_query($db, "INSERT INTO player(idx, id, checkT, w, k, score) VALUES($roomidx, $player, 0, 0, 0, 100)");
 }
 else{
   for($i = 1; $i <= 3; $i++){
     $num_sql = mysqli_query($db, "SELECT * FROM player WHERE idx = $roomidx AND checkT = $i");
     $num_row = mysqli_num_rows($num_sql);
     if($num_row == 0){
-      $player_sql = mysqli_query($db, "INSERT INTO player(idx, id, checkT, score) VALUES($roomidx, $player, $i, 100)");
+      $player_sql = mysqli_query($db, "INSERT INTO player(idx, id, checkT, w, k, score) VALUES($roomidx, $player, $i, 0, 0, 100)");
       break;
     }
   }
@@ -39,8 +39,8 @@ else{
 
   var isplayerTimer = setInterval('isplayer(roomidx, playerid)', 100);
   //1초마다 서버에서 wearable & kinect data call
-  //var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
-  //var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+  var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 100);
+  var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 100);
 
   /*서버에서 wearable data 콜하는 함수*/
   function wearableServerCall(pmajor){
@@ -54,8 +54,8 @@ else{
       cache: false,
       success: function(data){  //전송에 성공하면 실행될 코드
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
-          wearable = 1;
-          changeWearableIcon(wearable);
+          sensor = 1;
+          changeWearableIcon(sensor ,pmajor);
         }
       }
     });
@@ -72,25 +72,67 @@ else{
       cache: false,
       success: function(data){ //전송에 성공하면 실행될 코드
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
-          kinect = 1;
-          changeKinectIcon(kinect);
+          sensor = 2;
+          changeKinectIcon(sensor, pmajor);
         }
       }
     });
   }
   /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
-  function changeWearableIcon(wearable){
-    if(wearable == 1){
-        clearInterval(wearableServerTimer);
-        document.getElementById('wIcon').innerHTML = "<img src='../img/checked.png' style='width:20px; height:20px;'/>";
-       }
+  function changeWearableIcon(sensor, pmajor){
+    $.ajax({
+      url: "checksensor.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      type: "GET", //전송 방식(get/post)
+      async: true,
+      //data: playData,
+      dataType: "json", //요청한 데이터 타입
+      cache: false,
+      success: function(response){ //전송에 성공하면 실행될 코드
+        //alert(JSON.stringify(response));
+        //clearInterval(kinectServerTimer);
+        document.getElementById('wIcon0').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('wIcon1').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('wIcon2').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('wIcon3').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+
+        for(i = 0; i < response.length; i++){
+          var checkT_r = response[i].checkT;
+          var w = response[i].w;
+
+          if(w == 1){
+            document.getElementById('wIcon'+checkT_r.toString()).innerHTML ="<img src='../img/checked.png' style='width:20px; height:20px;'/>";
+          }
+        }
+      }
+    });
    }
   /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
-  function changeKinectIcon(kinect){
-    if(kinect == 1){
-        clearInterval(kinectServerTimer);
-        document.getElementById('kIcon').innerHTML ="<img src='../img/checked.png' style='width:20px; height:20px;'/>";
-    }
+  function changeKinectIcon(sensor, pmajor){
+    $.ajax({
+      url: "checksensor.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      type: "GET", //전송 방식(get/post)
+      async: true,
+      //data: playData,
+      dataType: "json", //요청한 데이터 타입
+      cache: false,
+      success: function(response){ //전송에 성공하면 실행될 코드
+        //alert(JSON.stringify(response));
+        //clearInterval(kinectServerTimer);
+        document.getElementById('kIcon0').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('kIcon1').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('kIcon2').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+        document.getElementById('kIcon3').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
+
+        for(i = 0; i < response.length; i++){
+          var checkT_r = response[i].checkT;
+          var k = response[i].k;
+
+          if(k == 1){
+            document.getElementById('kIcon'+checkT_r.toString()).innerHTML ="<img src='../img/checked.png' style='width:20px; height:20px;'/>";
+          }
+        }
+      }
+    });
   }
   /*방에 들어온 여부에 따라 화면에 표시하는 함수*/
   function isplayer(roomidx, playerid){
@@ -104,7 +146,7 @@ else{
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드
         //alert(JSON.stringify(response));
-        $("#Trainer").html("-");
+        $("#Player0").html("-");
         $("#Player1").html("-");
         $("#Player2").html("-");
         $("#Player3").html("-");
@@ -113,18 +155,7 @@ else{
           var checkT_result = response[i].checkT;
           var player_result = response[i].email;
 
-          if(checkT_result == 0){
-            $("#Trainer").html(player_result); //화면에 뿌리기
-          }
-          else if(checkT_result == 1){
-            $("#Player1").html(player_result);
-          }
-          else if(checkT_result == 2){
-            $("#Player2").html(player_result);
-          }
-          else if(checkT_result == 3){
-            $("#Player3").html(player_result);
-          }
+          $("#Player"+checkT_result.toString()).html(player_result); //화면에 뿌리기
         }
       }
     });
@@ -147,14 +178,14 @@ else{
         <div class="card-body">
           <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
           <br>
-          <h5 id="Trainer" class="card-title">-</h5>
+          <h5 id="Player0" class="card-title">-</h5>
         </div>
         <div class="card-footer bg-transparent border-wefit">
           <b>Wearables </b>
-          <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+          <span id="wIcon0"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
           &nbsp
           <b>Kinect</b>
-          <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+          <span id="kIcon0"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
         </div>
       </div>
     </div>
@@ -172,10 +203,10 @@ else{
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
-              <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="wIcon1"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
               <b>Kinect</b>
-              <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="kIcon1"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>
 
@@ -188,10 +219,10 @@ else{
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
-              <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="wIcon2"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
               <b>Kinect</b>
-              <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="kIcon2"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>
 
@@ -204,10 +235,10 @@ else{
             </div>
             <div class="card-footer bg-transparent border-wefit">
               <b>Wearables </b>
-              <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="wIcon3"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
               <b>Kinect</b>
-              <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+              <span id="kIcon3"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>
 
