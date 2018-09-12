@@ -1,14 +1,12 @@
 <?php
 include('../config.php');
 
-$json_data = $_POST['triData'];
-$value = json_decode(stripcslashes($json_data));
 
-$minus=$value['minus'];
-$pmajor=$value['pmajor'];
+$minus=$_GET['minusScore'];
+$pmajor=$_GET['pmajor'];
 
 //수강생의 major에 따른 현재 저장된 score, id, idx를 가져옴
-$db_sql=mysqli_query($db, "SELECT * FROM player, users WHERE users.id=player.id AND major='".$pmajor."'");
+$db_sql=mysqli_query($db, "SELECT * FROM player, users WHERE users.id=player.id AND major=$pmajor");
 
 $row=mysqli_fetch_array($db_sql);
 $score=$row['score'];
@@ -25,5 +23,5 @@ $rank_sql=mysqli_query($db, "SELECT idx, id, checkT, score, (SELECT COUNT(*)+1 F
 $rank_row=mysqli_fetch_array($rank_sql);
 $rank=$rank_row['rank'];
 
-echo(json_encode(array("score" => $result, "rank" => $rank)));
+echo json_encode(array('score' => $result, 'rank' => $rank));
 ?>

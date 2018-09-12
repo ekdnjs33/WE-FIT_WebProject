@@ -53,11 +53,13 @@ else{
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(data){  //전송에 성공하면 실행될 코드
+        sensor = 1;
+
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
 
-          sensor = 1;
           changeWearableIcon(sensor ,pmajor);
         }
+        searchAllWearable(roomidx,sensor);
       }
     });
   }
@@ -72,25 +74,24 @@ else{
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(data){ //전송에 성공하면 실행될 코드
+        sensor = 2;
+        //alert("kinect");
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
-          sensor = 2;
           changeKinectIcon(sensor, pmajor);
+          //alert("kinecthh");
         }
+        searchAllKinect(roomidx,sensor);
       }
     });
   }
-  /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
-  function changeWearableIcon(sensor, pmajor){
+  function searchAllWearable(roomidx,sensor){
     $.ajax({
-      url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
-      async: true,
-      //data: playData,
-      dataType: "json", //요청한 데이터 타입
+      url: "showcheck.php?roomidx="+roomidx+"&sensor="+sensor,
+      type: "GET",
+      async: false,
+      dataType: "json",
       cache: false,
-      success: function(response){ //전송에 성공하면 실행될 코드
-        //alert(JSON.stringify(response));
-        //clearInterval(kinectServerTimer);
+      success: function(response){
         document.getElementById('wIcon0').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
         document.getElementById('wIcon1').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
         document.getElementById('wIcon2').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
@@ -106,19 +107,15 @@ else{
         }
       }
     });
-   }
-  /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
-  function changeKinectIcon(sensor, pmajor){
+  }
+  function searchAllKinect(roomidx,sensor){
     $.ajax({
-      url: "checkkinect.php?roomidx="+roomidx+"&playermajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
-      async: true,
-      //data: playData,
-      dataType: "json", //요청한 데이터 타입
+      url: "showcheck.php?roomidx="+roomidx+"&sensor="+sensor,
+      type: "GET",
+      async: false,
+      dataType: "json",
       cache: false,
-      success: function(response){ //전송에 성공하면 실행될 코드
-        //alert(JSON.stringify(response));
-        //clearInterval(kinectServerTimer);
+      success: function(response){
         document.getElementById('kIcon0').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
         document.getElementById('kIcon1').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
         document.getElementById('kIcon2').innerHTML ="<img src='../img/close.png' style='width:20px; height:20px;'/>";
@@ -132,6 +129,34 @@ else{
             document.getElementById('kIcon'+checkT_r.toString()).innerHTML ="<img src='../img/checked.png' style='width:20px; height:20px;'/>";
           }
         }
+      }
+    });
+}
+  /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
+  function changeWearableIcon(sensor, pmajor){
+    $.ajax({
+      url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      type: "GET", //전송 방식(get/post)
+      async: true,
+      //data: playData,
+      dataType: "json", //요청한 데이터 타입
+      cache: false,
+      success: function(response){ //전송에 성공하면 실행될 코드
+      }
+    });
+   }
+  /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
+  function changeKinectIcon(sensor, pmajor){
+    $.ajax({
+      url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
+      type: "GET", //전송 방식(get/post)
+      async: true,
+      //data: playData,
+      dataType: "json", //요청한 데이터 타입
+      cache: false,
+      success: function(response){ //전송에 성공하면 실행될 코드
+        //alert(JSON.stringify(response));
+        //clearInterval(kinectServerTimer);
       }
     });
   }
