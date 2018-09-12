@@ -26,27 +26,27 @@ $player=$row['id'];
 
     /*키넥트 서버에서 mode2을 콜하는 함수*/
     function basicServerCall(rmajor, pmajor, tradingId, timeline){
-      var allData = {"sourceUser": rmajor, "targetUser": pmajor, "tradingID": tradingId, "sourceDataNumber": timeline};
+      //var allData = {"sourceUser": rmajor, "targetUser": pmajor, "tradingID": tradingId, "sourceDataNumber": timeline};
       $.ajax({
-      	url: "http://localhost:8080/algorithm/mode2",  //받아올 내용이 있는 url
-        type: GET, //전송 방식(get/post)
-        data: allData, //전송할 데이터
+      	url: "http://localhost:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
+        type: "GET", //전송 방식(get/post)
+        //data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){
           var minusScore = data;
-          var database = basicDB(minusScore, pmajor);
+          basicDB(minusScore, pmajor);
+          timeline++;
       	}
       });
-      timeline++;
     }
     /*DB에 데이터를 저장하고 불러오는 함수*/
     function basicDB(minusScore, pmajor){
-      var basData = {"minus": minusScore, "pmajor": pmajor};
+      //var basData = {"minus": minusScore, "pmajor": pmajor};
       $.ajax({
-      	url: "b3-database.php", //받아올 내용이 있는 url
-        type: POST, //전송 방식(get/post)
-        data: basData, //전송할 데이터
+      	url: "b3-database.php?minus="+minusScore+"&pmajor="+pmajor, //받아올 내용이 있는 url
+        type: "GET", //전송 방식(get/post)
+        //data: basData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){ //score와 rank 받아오기
@@ -66,7 +66,7 @@ $player=$row['id'];
           document.getElementById('down').innerHTML = "start";
 
           //1초마다 키넥트 서버의 mode2 콜
-          //var servertimer = setInterval('basicServerCall(rmajor, pmajor, tradingId, timeline)', 1000);
+          var servertimer = setInterval('basicServerCall(rmajor, pmajor, tradingId, timeline)', 1000);
         }
         else{
           seconds--;

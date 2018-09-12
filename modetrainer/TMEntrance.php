@@ -42,6 +42,8 @@ else{
   var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 100);
   var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 100);
 
+  var abledisableButton = ablebutton(roomidx, playerid);
+  var startExercising = setInterval('startExercise()', 100);
   /*서버에서 wearable data 콜하는 함수*/
   function wearableServerCall(pmajor){
     //var allData = {"userId": pmajor};
@@ -54,9 +56,7 @@ else{
       cache: false,
       success: function(data){  //전송에 성공하면 실행될 코드
         sensor = 1;
-
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
-
           changeWearableIcon(sensor ,pmajor);
         }
         searchAllWearable(roomidx,sensor);
@@ -75,10 +75,8 @@ else{
       cache: false,
       success: function(data){ //전송에 성공하면 실행될 코드
         sensor = 2;
-        //alert("kinect");
         if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
           changeKinectIcon(sensor, pmajor);
-          //alert("kinecthh");
         }
         searchAllKinect(roomidx,sensor);
       }
@@ -138,7 +136,6 @@ else{
       url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
-      //data: playData,
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드
@@ -151,7 +148,6 @@ else{
       url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
-      //data: playData,
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드
@@ -162,12 +158,10 @@ else{
   }
   /*방에 들어온 여부에 따라 화면에 표시하는 함수*/
   function isplayer(roomidx, playerid){
-    //var playData = {"roomidx": roomidx, "playerid": playerid};
     $.ajax({
       url: "isplayer.php?roomidx="+roomidx+"&playerid="+playerid, //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: true,
-      //data: playData,
       dataType: "json", //요청한 데이터 타입
       cache: false,
       success: function(response){ //전송에 성공하면 실행될 코드
@@ -186,6 +180,75 @@ else{
       }
     });
   }
+  /*운동 시작 버튼 활성화 비활성화*/
+  function ablebutton(roomidx, playerid){
+    $.ajax({
+      url: "abledisable.php?roomidx="+roomidx+"&playerid="+playerid,
+      type: "GET",
+      async: true,
+      dataType: "json",
+      cache: false,
+      success: function(response){
+        if(response.checkT > 0){
+          $('#startbtn').attr('disabled', true);
+        }
+        else{
+          $('#startbtn').attr('disabled', true);
+          var TrainerButton = setInterval('trainerButton(roomidx)', 100);
+        }
+      }
+    });
+  }
+  function trainerButton(roomidx){
+    $.ajax({
+      url: "allchecking.php?roomidx="+roomidx,
+      type: "GET",
+      async: true,
+      dataType: "json",
+      cache: false,
+      success: function(response){
+        //alert(JSON.stringify(response));
+        if(response.checking == 1){
+          $('#startbtn').attr('disabled', false);
+          $('#startbtn').css("background-color","#813f7f");
+        }
+        else{
+          $('#startbtn').attr('disabled', true);
+          $('#startbtn').css("background-color","#b2afa6");
+        }
+      }
+    });
+  }
+  /*운동 시작 버튼을 누른 경우 실행*/
+  function clickButton(){
+    $.ajax({
+      url: "clickbtn.php?roomidx="+roomidx+"&playerid="+playerid,
+      type: "GET",
+      async: true,
+      dataType: "json",
+      cache: false,
+      success: function(response){
+      }
+    });
+  }
+  /*트레이너가 운동 시작 버튼을 누른 경우, 각각의 사용자가 다음 페이지로 이동*/
+  function startExercise(){
+    $.ajax({
+      url: "startexercise.php?roomidx="+roomidx+"&playerid="+playerid,
+      type: "GET",
+      async: true,
+      dataType: "json",
+      cache: false,
+      success: function(response){
+        if(response.click == 1 && response.checkT == 0){
+          location.href = "TMView.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx";?>";
+        }
+        else if(response.click == 1 && response.checkT > 0){
+          location.href = "ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>"
+        }
+      }
+    });
+  }
   </script>
   <link href="../css/trainermode.css" rel="stylesheet"></link>
   <link href="../bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
@@ -194,7 +257,7 @@ else{
   <div id="top">
     <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>" style="text-decoration: none; color:black;">
     <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
-    <a href="ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
+    <!--<a href="ingUser.php?<?php //echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;">--><input style="position: absolute; right: 0; margin-right:70px; margin-top:50px; background-color:#b2afa6;" id="startbtn" class="make" type="button" value="시작하기" onclick='clickButton()'/><!--</a>-->
   </div>
 
   <div class="content-wrapper">
