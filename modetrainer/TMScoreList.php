@@ -9,13 +9,14 @@ $roomidx = $_GET['roomidx'];
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>WE FIT - Result Score</title>
-    <link href="css/trainermode.css" rel="stylesheet"></link>
-    <link href="bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
+    <script src="../js/jquery.js"></script>
+    <link href="../css/trainermode.css" rel="stylesheet"></link>
+    <link href="../bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
   </head>
   <body style="background:#f5c94c; font-family: '210 데이라잇';">
     <div id="top">
-      <a href="SelectMode.php" style="text-decoration: none; color:black;"> <!--style추가 다원-->
-        <br><img src="img/logo.png" alt="we fit 로고" width="7%" align="center"/><?php echo " $roomtitle"; ?>
+      <a href="../SelectMode.php" style="text-decoration: none; color:black;"> <!--style추가 다원-->
+        <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"/><?php echo " $roomtitle"; ?>
       </a>
     </div>
 
@@ -33,15 +34,15 @@ $roomidx = $_GET['roomidx'];
               <th scope="col">누적 점수</th>
             </tr>
           </thead>
-          <?php $sql = mysqli_query($db, "SELECT email, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score AND idx = $roomidx AND checkT != 0) AS rank FROM player AS b, users WHERE b.id = users.id ORDER BY rank ASC");
+          <?php $sql = mysqli_query($db, "SELECT idx, email, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score) AS ranking FROM player AS b, users WHERE b.id = users.id AND b.idx = $roomidx AND b.checkT > 0 ORDER BY ranking ASC");
           while($board = mysqli_fetch_array($sql)){
             $p_id = $board['email'];
             $p_score = $board['score'];
-            $p_rank = $board['rank'];
+            $p_rank = $board['ranking'];
           ?>
           <tbody>
             <tr>
-              <th scope="row"><img src="img/gold-medal.png" style="width: 30px; height: 30px;"/><?php echo $rank; ?></th>
+              <td scope="row"><img src="../img/gold-medal.png" style="width: 30px; height: 30px;"/><?php echo $p_rank; ?></td>
               <td><?php echo $p_id; ?></td>
               <td><?php echo $p_score; ?></td>
               <td><?php echo $p_score; ?></td>
@@ -49,19 +50,19 @@ $roomidx = $_GET['roomidx'];
           </tbody>
           <?php } ?>
         </table>
-        <?php $rank_sql = mysqli_query($db, "SELECT idx, id, checkT, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score AND idx = $roomidx) AS rank FROM player AS b WHERE id = $login_session ORDER BY rank ASC");
+        <?php $rank_sql = mysqli_query($db, "SELECT score, (SELECT COUNT(*)+1 FROM player GROUP BY idx HAVING score > b.score) AS ranking FROM player AS b WHERE id = $login_session ORDER BY ranking ASC");
 
         $rank_row = mysqli_fetch_array($rank_sql);
         $r_score = $rank_row['score'];
-        $r_rank = $rank_row['rank'];
+        $r_rank = $rank_row['ranking'];
         ?>
         <br>
-        <h4>나의 점수는 <?php echo $r_score; ?>점 , 순위는 <?php echo $r_rank-1; ?>위입니다!</h4> <!--h5~>h4변경 다원-->
+        <h4>나의 점수는<?php echo " $r_score"; ?>점 , 순위는<?php echo " $r_rank"; ?>위입니다!</h4> <!--h5~>h4변경 다원-->
       </div>
 
     </div>
     <p align="center" style="margin-top:50px;"> <!--30px~>50px변경 다원-->
-      <a href="SelectMode.php">
+      <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>">
         <input class="make" type="button" value="HOME"/>
       </a>
     </p>
