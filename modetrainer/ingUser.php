@@ -1,16 +1,6 @@
 <?php
 include('../lock.php');
 
-<<<<<<< HEAD:ingUser.php
-$roomtitle=$_GET['roomtitle'];
-$roomidx=$_GET['roomidx'];
-$trainer=$_GET['trainer'];
-
-$major_sql=mysqli_query($db, "SELECT * FROM users WHERE email='".$trainer."'");
-$major_row=mysqli_fetch_array($major_sql);
-$trainer_major=$major_row['major'];
-$playtime=date('Y-m-d H:i:s');
-=======
 $roomtitle = $_GET['roomtitle'];
 $roomidx = $_GET['roomidx'];
 $trainer = $_GET['trainer'];
@@ -18,7 +8,6 @@ $trainer = $_GET['trainer'];
 $major_sql = mysqli_query($db, "SELECT * FROM users WHERE email = '".$trainer."'");
 $major_row = mysqli_fetch_array($major_sql);
 $trainer_major = $major_row['major'];
->>>>>>> cfb10a9cab206327ccbe6016191f3506e12131c2:modetrainer/ingUser.php
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -31,10 +20,7 @@ $trainer_major = $major_row['major'];
     var seconds = 9;
     var pmajor = "<?php echo $player_major; ?>";
     var tmajor = "<?php echo $trainer_major; ?>";
-    var nowtime = "<?php echo $playtime; ?>";
 
-<<<<<<< HEAD:ingUser.php
-=======
     //1초 마다 카운트다운 함수 실행
     var countdownTimer = setInterval('secondPassed()', 1000);
 
@@ -54,14 +40,15 @@ $trainer_major = $major_row['major'];
 
       return year+"-"+mon+"-"+day+" "+hour+":"+min+":"+sec;
     }
->>>>>>> cfb10a9cab206327ccbe6016191f3506e12131c2:modetrainer/ingUser.php
     /*키넥트 서버에서 mode1을 콜하는 함수*/
-    function trainerServerCall(tmajor, pmajor, nowtime){
-      var allData = {"sourceUser":tmajor, "targetUser":pmajor, "now":nowtime};
+    function trainerServerCall(tmajor, pmajor){
+      var d = new Date();
+      nowtime = getFormatDate(d);
+      var allData = {tmajor, pmajor, nowtime};
       $.ajax({
-      	url: "http://localhost:8080/algorithm/mode1",  //받아올 내용이 있는 url
-        type: GET, //전송 방식(get/post)
-        data: allData, //전송할 데이터
+      	url: "http://14.49.37.187:8080/algorithm/mode1/"+tmajor+"/"+pmajor+"/"+nowtime,  //받아올 내용이 있는 url
+        type: "GET", //전송 방식(get/post)
+        //data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){
@@ -75,7 +62,7 @@ $trainer_major = $major_row['major'];
       var triData = {"minus": minusScore, "pmajor": pmajor};
       $.ajax({
       	url: "t-database.php", //받아올 내용이 있는 url
-        type: POST, //전송 방식(get/post)
+        type: "POST", //전송 방식(get/post)
         data: triData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
@@ -100,17 +87,8 @@ $trainer_major = $major_row['major'];
         clearInterval(countdownTimer);
         document.getElementById('down').innerHTML = "start";
 
-<<<<<<< HEAD:ingUser.php
-          //1초마다 키넥트 서버의 mode1 콜
-          var servertimer = setInterval('trainerServerCall(tmajor, pmajor, nowtime)', 1000);
-        }
-        else{
-          seconds--;
-        }
-=======
         //1초마다 키넥트 서버의 mode1 콜
         var servertimer = setInterval('trainerServerCall(tmajor, pmajor)', 1000);
->>>>>>> cfb10a9cab206327ccbe6016191f3506e12131c2:modetrainer/ingUser.php
       }
       else{
         seconds--;
