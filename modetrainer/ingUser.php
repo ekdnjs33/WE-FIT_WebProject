@@ -50,7 +50,7 @@ $trainer_major = $major_row['major'];
       var d = new Date();
       nowtime = getFormatDate(d);
       $.ajax({
-      	url: "http://14.49.37.187:8080/algorithm/mode1/"+tmajor+"/"+pmajor+"/"+nowtime,  //받아올 내용이 있는 url
+      	url: "https://14.49.37.187:8080/algorithm/mode1/"+tmajor+"/"+pmajor+"/"+nowtime,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         dataType: "json", //요청한 데이터 타입
       	cache: false,

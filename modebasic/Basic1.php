@@ -29,7 +29,7 @@ $player=$row['id'];
     function basicServerCall(rmajor, pmajor, tradingId, timeline){
       //var allData = {"sourceUser": rmajor, "targetUser": pmajor, "tradingID": tradingId, "sourceDataNumber": timeline};
       $.ajax({
-      	url: "http://localhost:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
+      	url: "https://14.49.37.187:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         //data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
@@ -80,9 +80,8 @@ $player=$row['id'];
     <div class="wrapper">
       <div class="one">10초 후에 운동을 시작합니다.</div>
       <div class="two1">참조 영상
-        <br><br><br><br><br>
 
-        <video autoplay id="sampleMovie" src="../img/sample.mp4" style="width:640px; height:480px;" controls>
+        <video id="sampleMovie" src="../img/sample.mp4" style="margin-top:50px; width:640px; height:480px;" autoplay controls>
         </video>
 
       </div>
@@ -101,8 +100,8 @@ $player=$row['id'];
       </div>
       <div class="two3">사용자 영상
         <br><br><br><br><br>
-        <video autoplay="true" id="videoElement1">
 
+        <video autoplay="true" id="videoElement1">
         </video>
 
       </div>
@@ -118,7 +117,7 @@ $player=$row['id'];
           console.log("Something went wrong!");
         });
       }
-      </script>
+    </script>
     </div>
   </body>
 </html>

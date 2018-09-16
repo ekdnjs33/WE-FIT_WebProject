@@ -28,7 +28,7 @@ $player=$row['id'];
     function basicServerCall(rmajor, pmajor, tradingId, timeline){
       //var allData = {"sourceUser": rmajor, "targetUser": pmajor, "tradingID": tradingId, "sourceDataNumber": timeline};
       $.ajax({
-      	url: "http://localhost:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
+      	url: "https://14.49.37.187:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         //data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입

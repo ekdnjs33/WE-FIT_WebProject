@@ -20,19 +20,21 @@ else{
     <title>WE FIT - StayMode</title>
     <script src="../js/jquery.js"></script>
     <script>
-    var wearable = 0;
-    var kinect = 0;
+    var wearable = 1;
+    var kinect = 1;
     var pmajor = "<?php echo $player_major; ?>";
 
     //1초마다 서버에서 wearable & kinect data call
     var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
     var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+    //시작버튼 활성화
+    var ableStart = setInterval('ablestartbtn(wearable, kinect)', 1000);
 
     /*서버에서 wearable data 콜하는 함수*/
     function wearableServerCall(pmajor){
       var allData = {"userId": pmajor};
       $.ajax({
-        url: "http://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
+        url: "https://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         async: false,
         //data: allData, //전송할 데이터
@@ -50,7 +52,7 @@ else{
     function kinectServerCall(pmajor){
       var allData = {"userId": pmajor};
       $.ajax({
-        url: "http://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
+        url: "https://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         async: false,
         //data: allData, //전송할 데이터
@@ -78,6 +80,14 @@ else{
         document.getElementById('kIcon').innerHTML ="<img src='../img/checked.png' style='width:20px; height:20px;'/>";
       }
     }
+    /*웨어러블, 키넥트 센서가 모두 연결된 경우 시작하기 버튼 활성화*/
+    function ablestartbtn(wearable, kinect){
+      if(wearable == 1 && kinect == 1){
+        clearInterval(ableStart);
+        $('#startbtn').attr('disabled', false);
+        $('#startbtn').css("background-color","#813f7f");
+      }
+    }
     </script>
     <link href="../css/trainermode.css" rel="stylesheet"></link>
     <link href="../bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
@@ -86,7 +96,7 @@ else{
     <div id="top">
       <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
       <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 1코스(Basic 1)</a> <!--기본 1코스(Basic 1)로 변경 다원-->
-      <a href="Basic1.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
+      <a href="Basic1.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input id="startbtn" class="make" style="margin-top:50px; background-color:#b2afa6;" disabled="true" type="button" value="시작하기"/></a>
     </div>
 
     <div class="content-wrapper">
@@ -106,9 +116,9 @@ else{
             <div class="card border-wefit mb-3" style="max-width: 400px; height: 500px; border:4px solid #813f7f;">
               <div class="card-header bg-transparent border-wefit text-wefit text-center"><h4><b>Player</b></h4></div>
               <div class="card-body">
-                <img src="../img/user-silhouette.png" style="margin-top: 60px; width:200px; height:200px;"/> <!--margin-top추가 다원-->
+                <img src="../img/user-silhouette.png" style="margin-top:40px; width:200px; height:200px;"/>
                 <br><br>
-                <h5 class="card-title"></h5>
+                <h4 class="card-title" style="margin-top:10px;"><?php echo $login_session; ?></h4>
               </div>
 
               <div class="card-footer bg-transparent border-wefit">
