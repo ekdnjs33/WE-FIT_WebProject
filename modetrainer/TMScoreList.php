@@ -38,7 +38,7 @@ $roomidx = $_GET['roomidx'];
           while($board = mysqli_fetch_array($sql)){
             $p_id = $board['email'];
             $p_score = $board['score'];
-            $p_rank = $board['ranking'];
+            $p_rank = $board['ranking']-1;
 
             if($login_session == $p_id){
               $myscore = $p_score;

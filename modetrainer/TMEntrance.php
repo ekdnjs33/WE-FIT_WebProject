@@ -48,7 +48,7 @@ else{
   function wearableServerCall(pmajor){
     //var allData = {"userId": pmajor};
     $.ajax({
-      url: "https://14.49.37.187:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
+      url: "https://we-fit.co.kr:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: false,
       //data: allData, //전송할 데이터
@@ -67,7 +67,7 @@ else{
   function kinectServerCall(pmajor){
     //var allData = {"userId": pmajor};
     $.ajax({
-      url: "https://14.49.37.187:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
+      url: "https://we-fit.co.kr:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
       type: "GET", //전송 방식(get/post)
       async: false,
       //data: allData, //전송할 데이터
