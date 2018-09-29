@@ -77,10 +77,11 @@ $player=$row['id'];
   <body>
     <div class="wrapper">
       <div class="one">10초 후에 운동을 시작합니다.</div>
-      <div class="two1">참조 영상
+      <div class="two1">사용자 영상
         <br><br><br><br><br>
 
-        <video autoplay id="sampleMovie" src="../img/sample.mp4" style="width:640px; height:480px;" controls>
+        <video autoplay="true" id="videoElement3">
+
         </video>
 
       </div>
@@ -96,11 +97,9 @@ $player=$row['id'];
           <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
         </div>
       </div>
-      <div class="two3">사용자 영상
+      <div class="two3">화이팅
         <br><br><br><br><br>
-        <video autoplay="true" id="videoElement3">
 
-        </video>
 
       </div>
       <script>
