@@ -230,8 +230,6 @@ else{
       success: function(response){
       }
     });
-    window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#4";?>",'_blank',"shilpijain","modal=no");
-    window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#6";?>",'_blank',"shilpijain","modal=no");
   }
   /*트레이너가 운동 시작 버튼을 누른 경우, 각각의 사용자가 다음 페이지로 이동*/
   function startExercise(){
@@ -243,11 +241,10 @@ else{
       cache: false,
       success: function(response){
         if(response.click == 1 && response.checkT == 0){
-
           location.href = "TMView.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx";?>";
         }
         else if(response.click == 1 && response.checkT > 0){
-          location.href = "ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>";
+          location.href = "ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>"
         }
       }
     });

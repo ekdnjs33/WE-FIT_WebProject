@@ -37,6 +37,14 @@
           console.log("Something went wrong!");
         });
       }
+      var url = "index.html";
+
+      function openWindow(url){
+        alert(1);
+        window.open(url,'_blank',"shilpijain","modal=no");
+        window.focus();
+      }
+      var newPage = setInterval('openWindow(url)', 10000);
     </script>
   </body>
 </html>

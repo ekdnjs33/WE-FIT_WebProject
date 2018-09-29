@@ -2,10 +2,10 @@
 if (!location.hash) {
   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
-const roomHash = "location.hash.substring(1);"
+const roomHash = location.hash.substring(1);
 
 // TODO: Replace with your own channel ID
-const drone = new ScaleDrone('wefit');
+const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
 const configuration = {

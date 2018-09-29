@@ -12,6 +12,19 @@ $player = $row['id'];
     <title>WE FIT -Playing</title>
     <script src="../js/jquery.js"></script>
     <link href="../css/basic.css" rel="stylesheet"></link>
+    <style>
+    #container {
+      margin: 0px auto;
+      width: 600px;
+      height: 600px;
+
+    }
+    #videoElement {
+      width: 600px;
+      height: 600px;
+
+    }
+    </style>
     <script>
     var seconds = 9;
     var roomidx = "<?php echo $roomidx; ?>";
@@ -70,7 +83,11 @@ $player = $row['id'];
   <body>
     <div class="wrapper">
       <div class="one">10초 후에 운동을 시작합니다.</div>
-      <div class="two1"><h4><b>Trainer</b></h4></div>
+      <div class="two1"><h4><b>Trainer</b></h4>
+        <div id="container">
+          <video autoplay="true" id="videoElement"></video>
+        </div>
+      </div>
       <div class="two2">
         <div class="resultshow">
           <!--<p class="now"></p>
@@ -117,5 +134,19 @@ $player = $row['id'];
       </div>
 
     </div>
+    <script>
+      var video = document.querySelector("#videoElement");
+
+      if(navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia({video: true})
+        .then(function(stream){
+          video.srcObject = stream;
+        })
+        .catch(function(err0r) {
+          console.log("Something went wrong!");
+        });
+      }
+
+    </script>
   </body>
 </html>

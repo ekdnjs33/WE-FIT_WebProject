@@ -1,7 +1,6 @@
 <?php
 include('../lock.php');
 
-
 $roomtitle = $_GET['roomtitle'];
 $roomidx = $_GET['roomidx'];
 $trainer = $_GET['trainer'];
@@ -160,31 +159,21 @@ $trainerOrNot = $trainer_row['checkT'];
     </div>
       <script >
       var ton = "<?php echo $trainerOrNot; ?>";
-      if(ton>0){ //if trainee
-
+      if(ton>0){
+        //alert("111");
           document.getElementById('videoName1').innerHTML = "사용자 영상";
           document.getElementById('videoName2').innerHTML = "트레이너 영상";
-          //사용자면 본인의 아이디로 방 hash 생성
-          if (!location.hash) {
-            location.hash ="<?php echo $player; ?>";
-          }
       }
-      else{ //if trainer
-        <?php
-        $userlistsql = mysqli_query($db, "SELECT id FROM player WHERE idx = $roomidx and checkT > 0");
+      //alert(ton);
+      // Generate random room name if needed
+      if (!location.hash) {
+        location.hash = "<?php echo $player; ?>";
+      }
 
-        while($userlist= mysqli_fetch_array($userlistsql)){
-          $wearable = $userlist['id'];
-          $trainercheck = $userlist['checkT'];
-          $arr[$num] = array('checkT' => $trainercheck, 'w' => $wearable);
-          $num++;
-        }
-        ?>
-      }
       const roomHash = "location.hash.substring(1);"
 
       // TODO: Replace with your own channel ID
-      const drone = new ScaleDrone('yiS12Ts5RdNhebyM');
+      const drone = new ScaleDrone('z6ttUqPTrOWam9Q0');
       // Room name needs to be prefixed with 'observable-'
       const roomName = 'observable-' + roomHash;
       const configuration = {
@@ -248,7 +237,6 @@ $trainerOrNot = $trainer_row['checkT'];
           }
         }
 
-
         // When a remote stream arrives display it in the #remoteVideo element
           pc.ontrack = event => {
             const stream = event.streams[0];
@@ -291,7 +279,6 @@ $trainerOrNot = $trainer_row['checkT'];
           }
         });
       }
-
       function localDescCreated(desc) {
         pc.setLocalDescription(
           desc,
@@ -299,6 +286,7 @@ $trainerOrNot = $trainer_row['checkT'];
           onError
         );
       }
+
       </script>
   </body>
 </html>
