@@ -21,12 +21,12 @@ else{
     <script src="../js/jquery.js"></script>
     <script>
     var wearable = 0;
-    var kinect = 0;
+    var kinect = 1;
     var pmajor = "<?php echo $player_major; ?>";
 
     //1초마다 서버에서 wearable & kinect data call
     var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
-    var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+    //var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
     //시작버튼 활성화
     var ableStart = setInterval('ablestartbtn(wearable, kinect)', 1000);
 
@@ -126,7 +126,7 @@ else{
                 <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
                 &nbsp
                 <b>Kinect</b>
-                <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+                <span id="kIcon"><img src="../img/checked.png" style="width:20px; height:20px;"/></span>
               </div>
             </div>
           </div>

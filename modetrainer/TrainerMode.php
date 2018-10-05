@@ -26,7 +26,7 @@ $number=0; //방 번호
     <center>
       <div id="bottom">
         <table width="90%">
-          <caption style="padding:15px">전체 방 목록</caption>
+          <caption style="padding:15px; font-family: 'a고딕14';">전체 방 목록</caption>
           <colgroup>
             <col width="10%">
             <col width="60%">

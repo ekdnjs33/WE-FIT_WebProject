@@ -29,17 +29,14 @@ include('../lock.php');
 
       <div id="container" align="center">
         <a href="BMEntrance1.php" style="text-decoration: none;">
-          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 1 코스(Basic 1)</p>
+          <div class="mode2" style="height:206px; margin-right:10px; font-size:23pt;"><p style="margin-top:70px;">스쿼트 심화 운동</p>
           </div>
         </a>
         <a href="BMEntrance2.php" style="text-decoration: none;">
-          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 2 코스(Basic 2)</p>
+          <div class="mode2" style="height:206px; margin-right:10px; font-size:23pt;"><p style="margin-top:70px;">런지 심화 운동</p>
           </div>
         </a>
-        <a href="BMEntrance3.php" style="text-decoration: none;">
-          <div class="mode2" style="height:180px; margin-right:10px; font-size:23pt"><p style="margin-top:70px;">기본 3 코스(Basic 3)</p>
-          </div>
-        </a>
+
       </div>
     </div>
 
@@ -52,11 +49,12 @@ include('../lock.php');
             <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
-            기본 1코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
+            스쿼트 심화 운동 : 3초간 유지 3회
             <br>
-            기본 2코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
+            런지 심화 운동 : 3초간 유지 좌우 2세트
             <br>
-            기본 3코스에 대한 설명 적기 (운동 시간, 운동 부위, 운동 효과 등)
+            자세한 운동 부위에 대한 설명은 클릭 후 Course Info를 참조하세요:)
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff;" data-dismiss="modal">Close</button>

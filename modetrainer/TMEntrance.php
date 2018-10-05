@@ -176,8 +176,17 @@ else{
           var player_result = response[i].email;
 
           $("#Player"+checkT_result.toString()).html(player_result); //화면에 뿌리기
-        }
-      }
+          if(checkT_result == 0)
+            document.getElementById('t0').innerHTML ="<img src='../img/trainer.png' style='width:130px; height:130px;'/>";
+          if(checkT_result == 1)
+            document.getElementById('t1').innerHTML ="<img src='../img/trainee1.png' style='width:130px; height:130px;'/>";
+          if(checkT_result == 2)
+            document.getElementById('t2').innerHTML ="<img src='../img/trainee2.png' style='width:130px; height:130px;'/>";
+          if(checkT_result == 3)
+            document.getElementById('t3').innerHTML ="<img src='../img/trainee3.png' style='width:130px; height:130px;'/>";
+          }
+          }
+
     });
   }
   /*운동 시작 버튼 활성화 비활성화*/
@@ -230,8 +239,10 @@ else{
       success: function(response){
       }
     });
-    window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#4";?>",'_blank',"shilpijain","modal=no");
-    window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#6";?>",'_blank',"shilpijain","modal=no");
+    var win1 = window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#4";?>",'_blank',"shilpijain","modal=no");
+    var win2 = window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#6";?>",'_blank',"shilpijain","modal=no");
+    win1.focus();
+    win2.focus();
   }
   /*트레이너가 운동 시작 버튼을 누른 경우, 각각의 사용자가 다음 페이지로 이동*/
   function startExercise(){
@@ -266,9 +277,9 @@ else{
   <div class="content-wrapper">
     <div class="container" align="center">
       <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
-        <div class="card-header bg-transparent border-wefit text-wefit text-center "><img src="../img/crown.png" style="width:20px; height:20px;"/>&nbsp<b>Trainer</b>&nbsp<img src="../img/crown.png" style="width:20px; height:20px;"/></div>
+        <div class="card-header bg-transparent border-wefit text-wefit text-center " style="font-family: 'a고딕17'; font-size: 20px;"><img src="../img/crown.png" style="width:25px; height:25px;"/>&nbspTrainer&nbsp<img src="../img/crown.png" style="width:25px; height:25px;"/></div>
         <div class="card-body">
-          <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+          <span id="t0"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
           <br>
           <h5 id="Player0" class="card-title">-</h5>
         </div>
@@ -287,9 +298,9 @@ else{
         <div class="card-deck mb-3 text-center" style="padding-left: 92px;">
 
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f; ">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player1</b></div>
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player1</div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <span id="t1"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
               <br>
               <h5 id="Player1" class="card-title">-</h5>
             </div>
@@ -303,9 +314,9 @@ else{
           </div>
 
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player2</b></div>
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player2</div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <span id="t2"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
               <br>
               <h5 id="Player2" class="card-title">-</h5>
             </div>
@@ -319,9 +330,9 @@ else{
           </div>
 
           <div class="card border-wefit mb-3" style="max-width: 18rem;border:4px solid #813f7f;">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center"><b>Player3</b></div>
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player3</div>
             <div class="card-body">
-              <img src="../img/user-silhouette.png" style="width:100px; height:100px;margin-bottom:15px"/>
+              <span id="t3"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
               <br>
               <h5 id="Player3" class="card-title">-</h5>
             </div>

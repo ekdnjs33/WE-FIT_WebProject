@@ -1,4 +1,5 @@
 <?php
+//스쿼트 심화 운동 코드
 include('../lock.php');
 
 $player=$row['id'];
@@ -16,28 +17,78 @@ $player=$row['id'];
     <link href="../css/basic.css" rel="stylesheet"></link>
     <script>
 
-    var seconds = 9;
+    //var seconds = 9;
     var pmajor = "<?php echo $player_major; ?>";
-    var rmajor = "0000";
     var tradingId = 1;
-    var timeline = 1;
+    var up = 0;
+    var down = 0;
 
     //1초 마다 카운트다운 함수 실행
-    var countdownTimer = setInterval('secondPassed()', 1000);
+    //var countdownTimer = setInterval('secondPassed()', 1000);
+    //1초마다 키넥트 서버의 mode2 콜
+    var servertimer = setInterval('basicServerCall(pmajor, tradingId, nowtime)', 1000);
 
+    /*실시간 날짜와 시간을 받아오는 함수*/
+    function getFormatDate(date){
+      var year = date.getFullYear();
+      var mon = (1+date.getMonth());
+      mon = mon>=10?mon:'0'+mon;
+      var day = date.getDate();
+      day = day>=10?day:'0'+day;
+      var hour = date.getHours();
+      hour = hour>=10?hour:'0'+hour;
+      var min = date.getMinutes();
+      min = min>=10?min:'0'+min;
+      var sec = date.getSeconds();
+      sec = sec>=10?sec:'0'+sec;
+
+      return year+"-"+mon+"-"+day+" "+hour+":"+min+":"+sec;
+    }
     /*키넥트 서버에서 mode2을 콜하는 함수*/
-    function basicServerCall(rmajor, pmajor, tradingId, timeline){
-      //var allData = {"sourceUser": rmajor, "targetUser": pmajor, "tradingID": tradingId, "sourceDataNumber": timeline};
+    function basicServerCall( pmajor, tradingId, nowtime){
+      var d = new Date();
+      var state = 0;
+      nowtime = getFormatDate(d);
       $.ajax({
-      	url: "https://14.49.37.187:8080/algorithm/mode2/"+rmajor+"/"+pmajor+"/"+tradingId+"/"+timeline,  //받아올 내용이 있는 url
+      	url: "https://we-fit.co.kr:8080/algorithm/basicMode/"+pmajor+"/"+tradingId+"/"+nowtime,  //받아올 내용이 있는 url
         type: "GET", //전송 방식(get/post)
         //data: allData, //전송할 데이터
         dataType: "json", //요청한 데이터 타입
       	cache: false,
       	success: function(data){
-          var minusScore = data;
-          basicDB(minusScore, pmajor);
-          timeline++;
+          if(data == 1)
+            if(up > 1){
+              $(".minus").html("-1"); //화면에 뿌리기
+              $(".feedback").html("더 올라가야해요!");
+              $(".updown").css('color', 'red');
+              $(".updown").html("UP");
+              BasicDB(1, pmajor);
+              up=0;
+            }
+            $(".minus").html("-0.4"); //화면에 뿌리기
+            $(".feedback").html("올라가세요.");
+            $(".updown").html("UP");
+            up+=0.4;
+          }
+          else if(data == 2){
+            if(down > 1){
+              $(".minus").html("-1"); //화면에 뿌리기
+              $(".feedback").html("더 내려가야해요^^");
+              $(".updown").css('color', 'red');
+              $(".updown").html("DOWN");
+              basicDB(1, pmajor);
+              down=0;
+            }
+            $(".minus").html("-0.4"); //화면에 뿌리기
+            $(".feedback").html("내려가세요.");
+            $(".updown").html("DOWN");
+            down+=0.4;
+          }
+          else if(data == 0){
+            $(".minus").html("-");
+            $(".feedback").html("좋아요:)");
+            $(".updown").html("GOOD")
+          }
       	}
       });
     }
@@ -67,7 +118,7 @@ $player=$row['id'];
           document.getElementById('down').innerHTML = "start";
 
           //1초마다 키넥트 서버의 mode2 콜
-          var servertimer = setInterval('basicServerCall(rmajor, pmajor, tradingId, timeline)', 1000);
+          //var servertimer = setInterval('basicServerCall(rmajor, pmajor, tradingId, timeline)', 1000);
         }
         else{
           seconds--;
@@ -78,8 +129,8 @@ $player=$row['id'];
   </head>
   <body>
     <div class="wrapper">
-      <div class="one">10초 후에 운동을 시작합니다.</div>
-      <div class="two1">사용자 영상
+      <div class="one">스쿼트 3초 유지 3회, 운동을 시작하세요!</div>
+      <div class="two1">
         <br><br><br><br><br>
         <video autoplay="true" id="videoElement1">
         </video>
@@ -90,19 +141,19 @@ $player=$row['id'];
         <div class="resultshow">
           <!--<p class="now"></p>
           <p class="rank"></p>-->
-          <p id="down" class="countdown">10</p>
+          <p id="down" class="countdown">start</p>
           <p class="now">내 점수</p>
           <p class="score">100</p>
         </div>
-        <div class="stopbtn">
+        <div class="stopbtn" style="margin-top:195px">
           <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
+          <a href="finishBasic.php?number=1&<?php echo "playerid=$player";?>"><input class="finish" type="button" value="운동 끝내기"></a>
         </div>
       </div>
-      <div class="two3">새로운 내용 넣어죠
-
-
-
-
+      <div class="two3">
+        <p class="minus" style="margin-top: 100px; font-size:30pt; color:red">-</p>
+        <p class="feedback" style="margin-top: 100px; font-size:30pt;">피드백</p>
+        <p class="updown" style="margin-top: 100px; font-size:30pt; color:red">-</p>
       </div>
       <script>
       var video = document.querySelector("#videoElement1");

@@ -14,7 +14,7 @@ include('../lock.php');
   <body style="background:#f5c94c; font-family: '210 데이라잇';">
     <div id="top">
       <a href="../SelectMode.php" style="text-decoration: none; color:black;"> <!--style추가 다원-->
-        <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"/><?php echo " 기본 모드 1"; ?>
+        <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"/><?php echo " 스쿼트 심화 운동"; ?>
       </a>
     </div>
 
@@ -23,13 +23,12 @@ include('../lock.php');
       <div class="container" align="center" style="margin-top: 50px;"> <!--style추가 다원-->
         <h3>운동 결과</h3> <!--b제거 다원-->
         <br><br>
-        <table class="table table-light table-bordered table-striped" style="border-color: #fff; width: 1000px;">
+        <table class="table table-light table-bordered table-striped" style="border-color: #fff; width: 1000px; font-family: 'a고딕13'; ">
           <thead style="background-color:#813f7f; color:#fff;">
             <tr>
               <th scope="col">순위</th>
               <th scope="col">ID</th>
               <th scope="col">운동 점수</th>
-              <th scope="col">누적 점수</th>
             </tr>
           </thead>
           <?php
@@ -49,9 +48,12 @@ include('../lock.php');
           ?>
           <tbody>
             <tr>
-              <td scope="row"><img src="../img/gold-medal.png" style="width: 30px; height: 30px;"/><?php echo $p_rank; ?></td>
+              <td scope="row">
+                <?php if($p_rank == 1){
+                  echo "<img src='../img/gold-medal.png' style='width: 30px; height: 30px;'/>";
+                }
+                echo $p_rank; ?></td>
               <td><?php echo $p_id; ?></td>
-              <td><?php echo $p_score; ?></td>
               <td><?php echo $p_score; ?></td>
             </tr>
           </tbody>

@@ -95,7 +95,7 @@ else{
   <body style="margin:8px; background:#f5c94c">
     <div id="top">
       <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
-      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 스쿼트 심화 운동</a> <!--기본 1코스(Basic 1)로 변경 다원-->
+      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 1코스(Basic 1)</a> <!--기본 1코스(Basic 1)로 변경 다원-->
       <a href="Basic1.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input id="startbtn" class="make" style="margin-top:50px; " type="button" value="시작하기"/></a>
     </div>
 
@@ -108,7 +108,6 @@ else{
               <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Course Info</b></h4></div>
               <div class="card-body" style="font-family: 'a고딕13'; text-align: left;" >
                 <h4><b>스쿼트 심화 운동</h4></b>
-
                 <h5><b>전신 근육 발달:</b> 신체를 지탱해주는 다리 근육과 힙 근육을 단단히 만들어 줍니다.</h5>
                 <h5><b>자세 교정:</b> 거북목이나 굽은 어깨의 증상을 바로 잡고 바른 자세 습관을 만들어 줍니다.</h5>
                 <h5><b>질병 예방:</b> 고혈압, 심장병, 당뇨병 등의 성인병 질환을 예방합니다. </h5>

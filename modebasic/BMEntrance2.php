@@ -20,15 +20,15 @@ else{
     <title>WE FIT - StayMode</title>
     <script src="../js/jquery.js"></script>
     <script>
-    var wearable = 0;
-    var kinect = 0;
+    var wearable = 1;
+    var kinect = 1;
     var pmajor = "<?php echo $player_major; ?>";
 
     //1초마다 서버에서 wearable & kinect data call
-    var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
-    var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
+    //var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 1000);
+    //var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 1000);
     //시작버튼 활성화
-    var ableStart = setInterval('ablestartbtn(wearable, kinect)', 1000);
+    //var ableStart = setInterval('ablestartbtn(wearable, kinect)', 1000);
 
     /*서버에서 wearable data 콜하는 함수*/
     function wearableServerCall(pmajor){
@@ -95,8 +95,8 @@ else{
   <body style="margin:8px; background:#f5c94c">
     <div id="top">
       <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
-      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 2코스(Basic 2)</a> <!--기본 2코스(Basic 2)로 변경 다원-->
-      <a href="Basic2.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px" class="make" type="button" value="시작하기"/></a>
+      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 런지 심화 운동</a> <!--기본 2코스(Basic 2)로 변경 다원-->
+      <a href="Basic2.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px " class="make" type="button" value="시작하기"/></a>
     </div>
 
     <div class="content-wrapper">
@@ -105,28 +105,32 @@ else{
         <center>
           <div class="card-deck mb-3 text-center" style="margin-top:50px; padding-left:150px;"> <!--margin-top추가 다원-->
             <div class="card border-wefit mb-3" style="max-width: 400px ; height: 500px; border:4px solid #813f7f;">
-              <div class="card-header bg-transparent border-wefit text-wefit text-center"><h4><b>코스명</b></h4></div>
-              <div class="card-body">
-                <h5><b>기본 2코스(Basic 2)</h5></b>
-                <h5><b>소요시간:</h5></b>
-                <h5><b>운동부위:</h5></b>
+              <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Course Info</b></h4></div>
+              <div class="card-body" style="font-family: 'a고딕13'; text-align: left;" >
+                <h4><b>런지 심화 운동</h4></b>
+                <br>
+                <h5><b>균형 감각 향상:</b> 신체 좌우 모두를 단련 시키며 몸의 균형과 조화를 이루어 줍니다.</h5>
+                <h5><b>둔근 운동:</b>대부분의 운동에서 활용되지 않는 근육을 사용해 줍니다.</h5>
+                <h5><b>코어 안정성 강화:</b> 몸의 중심 힘을 효과적으로 길러 줍니다. </h5>
+                <h5><b>척추 이완:</b>허리와 척추를 긴장 시키지 않으므로 척추를 쉬게 만들어 줍니다. </h5>
+                <br>
+                <h5>균형 감각, 몸의 대칭, 탄력성을 길러주는 런지 운동, 지금 시작해 보아요:)</h5>
               </div>
             </div>
 
             <div class="card border-wefit mb-3" style="max-width: 400px; height: 500px; border:4px solid #813f7f;">
-              <div class="card-header bg-transparent border-wefit text-wefit text-center"><h4><b>Player</b></h4></div>
+              <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Player</b></h4></div>
               <div class="card-body">
-                <img src="../img/user-silhouette.png" style="margin-top:40px; width:200px; height:200px;"/>
-                <br><br>
+                <img src="../img/trainee3.png" style="margin-top:40px; width:230px; height:230px;"/>
                 <h4 class="card-title" style="margin-top:10px;"><?php echo $login_session; ?></h4>
               </div>
 
               <div class="card-footer bg-transparent border-wefit">
                 <b>Wearables </b>
-                <span id="wIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+                <span id="wIcon"><img src="../img/checked.png" style="width:20px; height:20px;"/></span>
                 &nbsp
                 <b>Kinect</b>
-                <span id="kIcon"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
+                <span id="kIcon"><img src="../img/checked.png" style="width:20px; height:20px;"/></span>
               </div>
             </div>
           </div>

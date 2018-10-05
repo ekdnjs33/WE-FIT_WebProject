@@ -1,19 +1,19 @@
 <?php
 include('../lock.php');
 
-$player = $row['id'];
-//$playtime = date('Y-m-d H:i:s');
+$player=$row['id'];
+//$playtime=date('Y-m-d H:i:s');
 
-$is_sql = mysqli_query($db, "SELECT * FROM basicone WHERE id = $player");
+$is_sql = mysqli_query($db, "SELECT * FROM basictwo WHERE id = $player");
 $is_row = mysqli_num_rows($is_sql);
 if($is_row == 1){
-  $player_sql = mysqli_query($db, "UPDATE basicone SET score = 100 WHERE id = $player");
+  $player_sql = mysqli_query($db, "UPDATE basictwo SET score = 100 WHERE id = $player");
 }
 else{
-  $player_sql = mysqli_query($db, "INSERT INTO basicone(id, score, old_score) VALUES($player, 100, null)");
+  $player_sql = mysqli_query($db, "INSERT INTO basictwo(id, score, old_score) VALUES($player, 100, null)");
 }
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -95,8 +95,8 @@ else{
   <body style="margin:8px; background:#f5c94c">
     <div id="top">
       <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
-      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 스쿼트 심화 운동</a> <!--기본 1코스(Basic 1)로 변경 다원-->
-      <a href="Basic1.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input id="startbtn" class="make" style="margin-top:50px; " type="button" value="시작하기"/></a>
+      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 2코스(Basic 2)</a> <!--기본 2코스(Basic 2)로 변경 다원-->
+      <a href="Basic2.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px " class="make" type="button" value="시작하기"/></a>
     </div>
 
     <div class="content-wrapper">
@@ -107,23 +107,22 @@ else{
             <div class="card border-wefit mb-3" style="max-width: 400px ; height: 500px; border:4px solid #813f7f;">
               <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Course Info</b></h4></div>
               <div class="card-body" style="font-family: 'a고딕13'; text-align: left;" >
-                <h4><b>스쿼트 심화 운동</h4></b>
-
-                <h5><b>전신 근육 발달:</b> 신체를 지탱해주는 다리 근육과 힙 근육을 단단히 만들어 줍니다.</h5>
-                <h5><b>자세 교정:</b> 거북목이나 굽은 어깨의 증상을 바로 잡고 바른 자세 습관을 만들어 줍니다.</h5>
-                <h5><b>질병 예방:</b> 고혈압, 심장병, 당뇨병 등의 성인병 질환을 예방합니다. </h5>
-                <h5><b>노폐물 제거:</b> 다리 근육의 수축과 이완 동작을 통해 체내의 노폐물을 효과적으로 제거해 줍니다. </h5>
+                <h4><b>런지 심화 운동</h4></b>
                 <br>
-                <h5>그 외 건강한 관절과 뼈, 혈액 순환 개선, 체력과 유연성을 길러주는 스쿼트 운동, 지금 시작해 보아요:)</h5>
+                <h5><b>균형 감각 향상:</b> 신체 좌우 모두를 단련 시키며 몸의 균형과 조화를 이루어 줍니다.</h5>
+                <h5><b>둔근 운동:</b>대부분의 운동에서 활용되지 않는 근육을 사용해 줍니다.</h5>
+                <h5><b>코어 안정성 강화:</b> 몸의 중심 힘을 효과적으로 길러 줍니다. </h5>
+                <h5><b>척추 이완:</b>허리와 척추를 긴장 시키지 않으므로 척추를 쉬게 만들어 줍니다. </h5>
+                <br>
+                <h5>균형 감각, 몸의 대칭, 탄력성을 길러주는 런지 운동, 지금 시작해 보아요:)</h5>
               </div>
             </div>
 
             <div class="card border-wefit mb-3" style="max-width: 400px; height: 500px; border:4px solid #813f7f;">
               <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Player</b></h4></div>
               <div class="card-body">
-                <img src="../img/trainee1.png" style="margin-top:40px; width:230px; height:230px;"/>
-                <br><br>
-                <h4 class="card-title" ><?php echo $login_session; ?></h4>
+                <img src="../img/trainee3.png" style="margin-top:40px; width:230px; height:230px;"/>
+                <h4 class="card-title" style="margin-top:10px;"><?php echo $login_session; ?></h4>
               </div>
 
               <div class="card-footer bg-transparent border-wefit">
