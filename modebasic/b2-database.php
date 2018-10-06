@@ -1,11 +1,8 @@
 <?php
 include('../config.php');
 
-$json_data = $_POST['basData'];
-$value = json_decode($json_data);
-
-$minus = $value['minus'];
-$pmajor = $value['pmajor'];
+$minus = $_GET['minus'];
+$pmajor = $_GET['pmajor'];
 
 //수강생의 major에 따른 현재 저장된  id를 가져옴
 $db_sql = mysqli_query($db, "SELECT * FROM  basictwo, users WHERE basictwo.id = users.id AND major = $pmajor");

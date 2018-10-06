@@ -9,8 +9,4 @@ session_destroy();
 echo '<script type = "text/javascript">alert("로그아웃 되었습니다.")</script>';
 echo "<meta http-equiv='refresh' content='0; url=index.html'>";
 
-/*else{
-  echo '<script type = "text/javascript">alert("로그아웃하지 못했습니다.")</script>';
-  echo "<meta http-equiv='refresh' content='0; url=/'>";
-}*/
 ?>

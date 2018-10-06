@@ -1,4 +1,5 @@
 <?php
+/*방을 생성할 수 있는 화면*/
 include('../lock.php');
 ?>
 <!DOCTYPE html>

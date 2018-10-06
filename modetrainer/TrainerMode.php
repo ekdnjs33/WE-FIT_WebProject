@@ -10,27 +10,27 @@ $number=0; //방 번호
     <meta http-equiv=refresh content='3; url='>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <title>WE FIT - TrainerMode</title>
-    <script src="../js/jquery.js"></script>
     <link href="../css/trainermode.css" rel="stylesheet"></link>
+    <script src="../js/jquery.js"></script>
   </head>
   <body>
+
     <div id="top">
       <a href="../SelectMode.php">
         <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 트레이너 모드입니다!
       </a>
-      <p align="right" style="margin-top:20px; margin-right:70px"><a href="CreateRoom.php"><input class="make" type="button" value="방 생성하기"/></a>
+      <p align="right" style="margin-top:20px; margin-right:70px; margin-bottom:40px"><a href="CreateRoom.php"><input class="make" type="button" value="방 생성하기"/></a>
       </p>
-      <!--<p align="right" style="margin-right:70px"><input type="search">
-      <input type="submit" value="검색"></p>-->
     </div>
+
     <center>
       <div id="bottom">
-        <table width="90%">
-          <caption style="padding:15px; font-family: 'a고딕14';">전체 방 목록</caption>
+        <table width="91%">
+          <!--<caption style="margin-bottom: 10px; padding:15px; font-size: 20pt;">전체 방 목록</caption>-->
           <colgroup>
-            <col width="10%">
-            <col width="60%">
-            <col width="10%">
+            <col width="8%">
+            <col width="55%">
+            <col width="17%">
             <col width="20%">
           </colgroup>
           <thead>
@@ -60,5 +60,6 @@ $number=0; //방 번호
         </table>
       </div>
     </center>
+
   </body>
 </html>

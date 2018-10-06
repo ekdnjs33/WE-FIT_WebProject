@@ -1,5 +1,5 @@
 <?php
-//스쿼트 심화 운동 코드
+/*스쿼트 심화 운동 코드*/
 include('../lock.php');
 
 $player=$row['id'];
@@ -26,7 +26,7 @@ $player=$row['id'];
     //1초 마다 카운트다운 함수 실행
     //var countdownTimer = setInterval('secondPassed()', 1000);
     //1초마다 키넥트 서버의 mode2 콜
-    var servertimer = setInterval('basicServerCall(pmajor, tradingId, nowtime)', 1000);
+    var servertimer = setInterval('basicServerCall(pmajor, tradingId)', 1000);
 
     /*실시간 날짜와 시간을 받아오는 함수*/
     function getFormatDate(date){
@@ -45,28 +45,26 @@ $player=$row['id'];
       return year+"-"+mon+"-"+day+" "+hour+":"+min+":"+sec;
     }
     /*키넥트 서버에서 mode2을 콜하는 함수*/
-    function basicServerCall( pmajor, tradingId, nowtime){
+    function basicServerCall( pmajor, tradingId){
       var d = new Date();
       var state = 0;
       nowtime = getFormatDate(d);
       $.ajax({
       	url: "https://we-fit.co.kr:8080/algorithm/basicMode/"+pmajor+"/"+tradingId+"/"+nowtime,  //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
-        //data: allData, //전송할 데이터
-        dataType: "json", //요청한 데이터 타입
+        type: "GET",
+        dataType: "json",
       	cache: false,
       	success: function(data){
-          if(data == 1)
+          if(data == 1){
             if(up > 1){
               $(".minus").html("-1"); //화면에 뿌리기
-              $(".feedback").html("더 올라가야해요!");
-              $(".updown").css('color', 'red');
+              $(".feedback").html("더 올라가야해요!!");
               $(".updown").html("UP");
-              BasicDB(1, pmajor);
-              up=0;
+              basicDB(1, pmajor);
+             up=0;
             }
-            $(".minus").html("-0.4"); //화면에 뿌리기
-            $(".feedback").html("올라가세요.");
+            $(".minus").html("-"); //화면에 뿌리기
+            $(".feedback").html("올라가세요");
             $(".updown").html("UP");
             up+=0.4;
           }
@@ -74,34 +72,31 @@ $player=$row['id'];
             if(down > 1){
               $(".minus").html("-1"); //화면에 뿌리기
               $(".feedback").html("더 내려가야해요^^");
-              $(".updown").css('color', 'red');
               $(".updown").html("DOWN");
               basicDB(1, pmajor);
-              down=0;
+             down=0;
             }
-            $(".minus").html("-0.4"); //화면에 뿌리기
-            $(".feedback").html("내려가세요.");
+            $(".minus").html("-"); //화면에 뿌리기
+            $(".feedback").html("내려가세요");
             $(".updown").html("DOWN");
             down+=0.4;
           }
           else if(data == 0){
             $(".minus").html("-");
             $(".feedback").html("좋아요:)");
-            $(".updown").html("GOOD")
+            $(".updown").html("GOOD");
           }
       	}
       });
     }
     /*DB에 데이터를 저장하고 불러오는 함수*/
     function basicDB(minusScore, pmajor){
-      //var basData = {"minus": minusScore, "pmajor": pmajor};
       $.ajax({
       	url: "b1-database.php?minus="+minusScore+"&pmajor="+pmajor, //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
-        //data: basData, //전송할 데이터
-        dataType: "json", //요청한 데이터 타입
+        type: "GET",
+        dataType: "json",
       	cache: false,
-      	success: function(data){ //score와 rank 받아오기
+      	success: function(data){ //score 받아오기
           var score_result = data.score;
 
           $(".score").html(score_result); //화면에 뿌리기
@@ -139,20 +134,18 @@ $player=$row['id'];
 
       <div class="two2">
         <div class="resultshow">
-          <!--<p class="now"></p>
-          <p class="rank"></p>-->
           <p id="down" class="countdown">start</p>
           <p class="now">내 점수</p>
           <p class="score">100</p>
         </div>
         <div class="stopbtn" style="margin-top:195px">
-          <a href="BasicMode.php"><input class="finish" type="button" value="중단하기"></a>
+          <a href="BasicMode.php"><input class="finish" type="button" title="운동 중단시, 점수가 저장되지 않습니다" value="중단하기"></a>
           <a href="finishBasic.php?number=1&<?php echo "playerid=$player";?>"><input class="finish" type="button" value="운동 끝내기"></a>
         </div>
       </div>
       <div class="two3">
         <p class="minus" style="margin-top: 100px; font-size:30pt; color:red">-</p>
-        <p class="feedback" style="margin-top: 100px; font-size:30pt;">피드백</p>
+        <p class="feedback" style="margin-top: 100px; font-size:30pt;">준비</p>
         <p class="updown" style="margin-top: 100px; font-size:30pt; color:red">-</p>
       </div>
       <script>

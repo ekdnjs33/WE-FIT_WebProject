@@ -1,7 +1,6 @@
 <?php
 include('../lock.php');
 
-
 $roomtitle = $_GET['roomtitle'];
 $roomidx = $_GET['roomidx'];
 $trainer = $_GET['trainer'];
@@ -56,12 +55,10 @@ $trainerOrNot = $trainer_row['checkT'];
     function trainerServerCall(tmajor, pmajor){
       var d = new Date();
       nowtime = getFormatDate(d);
-      var allData = {tmajor, pmajor, nowtime};
       $.ajax({
         url: "https://we-fit.co.kr:8080/algorithm/mode1/"+tmajor+"/"+pmajor+"/"+nowtime,  //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
-        //data: allData, //전송할 데이터
-        dataType: "json", //요청한 데이터 타입
+        type: "GET",
+        dataType: "json",
         cache: false,
         success: function(data){
           console.log(data);
@@ -74,8 +71,8 @@ $trainerOrNot = $trainer_row['checkT'];
     function trainerDB(minusScore, pmajor){
       $.ajax({
          url: "t-database.php?minus="+minusScore+"&pmajor="+pmajor, //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
-        dataType: "json", //요청한 데이터 타입
+        type: "GET",
+        dataType: "json",
         cache: false,
         async: true,
         success: function(data){ //score와 rank 받아오기
@@ -83,15 +80,15 @@ $trainerOrNot = $trainer_row['checkT'];
           var score_result = data.score;
           var rank_result = data.rank;
 
-          /*if(minusScore == 0){
-            $(".minus").html("훌륭해요:)");
+          if(minusScore == 0){
+            $(".one").html("훌륭해요:)");
           }
           else if(minusScore > 0 && minusScore < 2){
-            $(".minus").html("좋아요:>");
+            $(".one").html("좋아요:>");
           }
           else if(minusScore > 1){
-            $(".minus").html("분발해요:(");
-          }*/
+            $(".one").html("분발해요:(");
+          }
           $(".minus").html(minus_result);
           $(".score").html(score_result); //화면에 뿌리기
           $(".rank").html(rank_result);
@@ -102,9 +99,7 @@ $trainerOrNot = $trainer_row['checkT'];
     function secondPassed(){
       var minutes = Math.round((seconds - 30)/60);
       var remainingSeconds = seconds % 60;
-        /*if (remainingSeconds < 10) {
-            remainingSeconds = "0" + remainingSeconds;
-        }*/
+
       document.getElementById('down').innerHTML = remainingSeconds;
       if(seconds == 0){
         clearInterval(countdownTimer);
@@ -139,11 +134,11 @@ $trainerOrNot = $trainer_row['checkT'];
       <div class="one">10초 후에 운동을 시작합니다.</div>
       <div class="two1">
           <p id="videoName1" style="font-size:20px">트레이너 영상</p><br><br><br>
-      <video id="localVideo" autoplay muted></video></div>
+      <video id="localVideo" autoplay style="max-width: 650px;"></video></div>
       <div class="two2">
         <div class="resultshow">
           <p id="down" class="countdown">10</p>
-          <p class="minus">-</p>
+          <p class="minus" style="color:red">-</p>
           <p class="now">현재 순위</p>
           <p class="rank">1</p>
           <p class="now">내 점수</p>
@@ -156,7 +151,7 @@ $trainerOrNot = $trainer_row['checkT'];
       <div class="two3">
           <p id="videoName2" style="font-size:20px" >사용자 영상</p>
         <br><br><br>
-        <video id="remoteVideo" autoplay></video></div>
+        <video id="remoteVideo" autoplay style="max-width: 650px;"></video></div>
     </div>
       <script >
       var ton = "<?php echo $trainerOrNot; ?>";

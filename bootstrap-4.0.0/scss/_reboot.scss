@@ -55,7 +55,7 @@ article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, s
 //    the `inherit` value on things like `<th>` elements.
 
 body {
-  margin: 0; // 1
+  margin: $body-margin;
   font-family: $font-family-base;
   font-size: $font-size-base;
   font-weight: $font-weight-base;

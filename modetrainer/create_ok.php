@@ -5,7 +5,7 @@ echo "<body style='background:#f5c94c'>";
 
 include('../lock.php');
 
-date_default_timezone_set("Asia/Seoul");//서울시간
+date_default_timezone_set("Asia/Seoul"); //서울시간
 
 $date = date('Y-m-d H:i:s');
 $roompw = $_POST['roompw'];

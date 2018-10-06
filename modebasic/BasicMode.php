@@ -6,19 +6,19 @@ include('../lock.php');
   <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <title>WE FIT - BasicMode</title>
-    <link href="../css/basicmode.css" rel="stylesheet"></link>
+    <link href="../newcss/basicmode.css" rel="stylesheet"></link>
     <link href="../bootstrap-4.0.0/dist/css/bootstrap.css" rel="stylesheet"></link>
     <script src="../js/popup.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../bootstrap-4.0.0/dist/js/bootstrap.js"></script>
   </head>
-  <body style="margin:8px; background:#f5c94c;">
+  <body style="margin:8px;">
 
-    <a href="../SelectMode.php" style="text-decoration: none;">
-      <div id="top">
-        <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 모드입니다!
-      </div>
-    </a>
+    <div id="top">
+      <a class="mode-url" href="../SelectMode.php" style="text-decoration: none; color:black;">
+      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 기본 모드입니다!
+      </a>
+    </div>
 
     <div id="bottom">
       <p align ="right" style="margin-right:15px">
@@ -28,12 +28,12 @@ include('../lock.php');
       </p>
 
       <div id="container" align="center">
-        <a href="BMEntrance1.php" style="text-decoration: none;">
-          <div class="mode2" style="height:206px; margin-right:10px; font-size:23pt;"><p style="margin-top:70px;">스쿼트 심화 운동</p>
+        <a class="mode-url" href="BMEntrance1.php" style="text-decoration: none;">
+          <div class="mode2"><p style="margin-top:78px;">스쿼트 심화 운동</p>
           </div>
         </a>
-        <a href="BMEntrance2.php" style="text-decoration: none;">
-          <div class="mode2" style="height:206px; margin-right:10px; font-size:23pt;"><p style="margin-top:70px;">런지 심화 운동</p>
+        <a class="mode-url" href="BMEntrance2.php" style="text-decoration: none;">
+          <div class="mode2"><p style="margin-top:78px;">런지 심화 운동</p>
           </div>
         </a>
 
@@ -48,16 +48,16 @@ include('../lock.php');
             <h4 class="modal-title" id="myModalLabel">기본코스 소개</h4>
             <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
-          <div class="modal-body">
-            스쿼트 심화 운동 : 3초간 유지 3회
+          <div class="modal-body" style="font-size: 14pt;">
+            스쿼트 심화 운동 : 3초간 유지 x 3회
             <br>
-            런지 심화 운동 : 3초간 유지 좌우 2세트
+            런지 심화 운동 : 3초간 유지 x 좌우 2세트
             <br>
-            자세한 운동 부위에 대한 설명은 클릭 후 Course Info를 참조하세요:)
+            자세한 운동 부위에 대한 설명은 클릭 후 Course Info를 참조하세요 :)
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff;" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" style="background-color:#813f7f; color:#fff; font-size: 13pt;" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

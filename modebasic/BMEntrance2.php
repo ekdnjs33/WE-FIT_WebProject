@@ -2,7 +2,6 @@
 include('../lock.php');
 
 $player=$row['id'];
-//$playtime=date('Y-m-d H:i:s');
 
 $is_sql = mysqli_query($db, "SELECT * FROM basictwo WHERE id = $player");
 $is_row = mysqli_num_rows($is_sql);
@@ -35,13 +34,12 @@ else{
       var allData = {"userId": pmajor};
       $.ajax({
         url: "https://we-fit.co.kr:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
+        type: "GET",
         async: false,
-        //data: allData, //전송할 데이터
-        dataType: "json", //요청한 데이터 타입
+        dataType: "json",
         cache: false,
-        success: function(data){  //전송에 성공하면 실행될 코드
-          if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        success: function(data){
+          if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
             wearable = 1;
             changeWearableIcon(wearable);
           }
@@ -53,13 +51,12 @@ else{
       var allData = {"userId": pmajor};
       $.ajax({
         url: "https://we-fit.co.kr:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
-        type: "GET", //전송 방식(get/post)
+        type: "GET",
         async: false,
-        //data: allData, //전송할 데이터
-        dataType: "json", //요청한 데이터 타입
+        dataType: "json",
         cache: false,
-        success: function(data){ //전송에 성공하면 실행될 코드
-          if(data.length > 0 ){//만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        success: function(data){
+          if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
             kinect = 1;
             changeKinectIcon(kinect);
           }
@@ -94,8 +91,8 @@ else{
   </head>
   <body style="margin:8px; background:#f5c94c">
     <div id="top">
-      <a href="BasicMode.php" style="text-decoration: none; color:black;"> <!--BasicMode.php로 변경 다원-->
-      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 런지 심화 운동</a> <!--기본 2코스(Basic 2)로 변경 다원-->
+      <a href="BasicMode.php" style="text-decoration: none; color:black;">
+      <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"> 런지 심화 운동</a>
       <a href="Basic2.php?<?php echo "player=$player";?>" style="position: absolute; right: 0; margin-right:70px;"><input style="margin-top:50px " class="make" type="button" value="시작하기"/></a>
     </div>
 
@@ -103,7 +100,7 @@ else{
 
       <div class="container" align="center">
         <center>
-          <div class="card-deck mb-3 text-center" style="margin-top:50px; padding-left:150px;"> <!--margin-top추가 다원-->
+          <div class="card-deck mb-3 text-center" style="margin-top:50px; padding-left:150px;">
             <div class="card border-wefit mb-3" style="max-width: 400px ; height: 500px; border:4px solid #813f7f;">
               <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><h4><b>Course Info</b></h4></div>
               <div class="card-body" style="font-family: 'a고딕13'; text-align: left;" >
@@ -124,18 +121,18 @@ else{
                 <img src="../img/trainee3.png" style="margin-top:40px; width:230px; height:230px;"/>
                 <h4 class="card-title" style="margin-top:10px;"><?php echo $login_session; ?></h4>
               </div>
-
-              <div class="card-footer bg-transparent border-wefit">
-                <b>Wearables </b>
+              <div class="card-footer bg-transparent border-wefit" style="font-family: 'a고딕16'; font-size: 14pt;">
+                <span>Wearables </span>
                 <span id="wIcon"><img src="../img/checked.png" style="width:20px; height:20px;"/></span>
                 &nbsp
-                <b>Kinect</b>
+                <span>Kinect</span>
                 <span id="kIcon"><img src="../img/checked.png" style="width:20px; height:20px;"/></span>
               </div>
             </div>
           </div>
         </center>
       </div>
+
     </div>
     <p align="center" style="font-family:'210 데이라잇'; font-size:18pt; margin-top:10px;">
     <span id="connect">키넥트 센서와 웨어러블 기기의 블루투스를 연결해주세요!</span>

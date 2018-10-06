@@ -22,7 +22,6 @@ else{
   }
 }
 ?>
-
 <!doctype html>
 <html>
 <head>
@@ -37,26 +36,27 @@ else{
   var roomidx = "<?php echo $roomidx; ?>";
   var playerid = "<?php echo $player; ?>";
 
-  var isplayerTimer = setInterval('isplayer(roomidx, playerid)', 100);
-  //1초마다 서버에서 wearable & kinect data call
+  var isplayerTimer = setInterval('isplayer(roomidx, playerid)', 100); //사용자가 입장 확인
+
+  //서버에서 wearable & kinect data 콜
   var wearableServerTimer = setInterval('wearableServerCall(pmajor)', 100);
   var kinectServerTimer = setInterval('kinectServerCall(pmajor)', 100);
 
+  //버튼 활성화 여부를 체크하여 운동을 시작
   var abledisableButton = ablebutton(roomidx, playerid);
   var startExercising = setInterval('startExercise()', 100);
+
   /*서버에서 wearable data 콜하는 함수*/
   function wearableServerCall(pmajor){
-    //var allData = {"userId": pmajor};
     $.ajax({
-      url: "https://we-fit.co.kr:8080/wearables/user/"+pmajor,  //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
+      url: "https://we-fit.co.kr:8080/wearables/user/"+pmajor, //받아올 내용이 있는 url
+      type: "GET",
       async: false,
-      //data: allData, //전송할 데이터
-      dataType: "json", //요청한 데이터 타입
+      dataType: "json",
       cache: false,
-      success: function(data){  //전송에 성공하면 실행될 코드
+      success: function(data){
         sensor = 1;
-        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 데이터 변경 함수 실행
           changeWearableIcon(sensor ,pmajor);
         }
         searchAllWearable(roomidx,sensor);
@@ -65,23 +65,22 @@ else{
   }
   /*서버에서 kinect data 콜하는 함수*/
   function kinectServerCall(pmajor){
-    //var allData = {"userId": pmajor};
     $.ajax({
       url: "https://we-fit.co.kr:8080/joints/user/"+pmajor,  //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
+      type: "GET",
       async: false,
-      //data: allData, //전송할 데이터
-      dataType: "json", //요청한 데이터 타입
+      dataType: "json",
       cache: false,
-      success: function(data){ //전송에 성공하면 실행될 코드
+      success: function(data){
         sensor = 2;
-        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 바꾸도록 실행
+        if(data.length > 0 ){ //만약 데이터가 들어왔다면 아이콘 변경 함수 실행
           changeKinectIcon(sensor, pmajor);
         }
         searchAllKinect(roomidx,sensor);
       }
     });
   }
+  /*사용자의 웨어러블이 연결되었는지 확인하여 표시*/
   function searchAllWearable(roomidx,sensor){
     $.ajax({
       url: "showcheck.php?roomidx="+roomidx+"&sensor="+sensor,
@@ -106,6 +105,7 @@ else{
       }
     });
   }
+  /*사용자의 키넥트가 연결되었는지 확인하여 표시*/
   function searchAllKinect(roomidx,sensor){
     $.ajax({
       url: "showcheck.php?roomidx="+roomidx+"&sensor="+sensor,
@@ -129,43 +129,40 @@ else{
         }
       }
     });
-}
-  /*연결 여부에 따라 웨어러블 icon 바꾸는 함수*/
+  }
+  /*연결 여부에 따라 웨어러블 icon 데이터를 표시하는 함수*/
   function changeWearableIcon(sensor, pmajor){
     $.ajax({
       url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
+      type: "GET",
       async: true,
-      dataType: "json", //요청한 데이터 타입
+      dataType: "json",
       cache: false,
-      success: function(response){ //전송에 성공하면 실행될 코드
+      success: function(response){
       }
     });
    }
-  /*연결 여부에 따라 키넥트 icon 바꾸는 함수*/
+  /*연결 여부에 따라 키넥트 icon 데이터를 표시하는 함수*/
   function changeKinectIcon(sensor, pmajor){
     $.ajax({
       url: "checksensor.php?roomidx="+roomidx+"&pmajor="+pmajor+"&sensor="+sensor, //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
+      type: "GET",
       async: true,
-      dataType: "json", //요청한 데이터 타입
+      dataType: "json",
       cache: false,
-      success: function(response){ //전송에 성공하면 실행될 코드
-        //alert(JSON.stringify(response));
-        //clearInterval(kinectServerTimer);
+      success: function(response){
       }
     });
   }
-  /*방에 들어온 여부에 따라 화면에 표시하는 함수*/
+  /*사용자 입장 여부에 따라 화면에 표시하는 함수*/
   function isplayer(roomidx, playerid){
     $.ajax({
       url: "isplayer.php?roomidx="+roomidx+"&playerid="+playerid, //받아올 내용이 있는 url
-      type: "GET", //전송 방식(get/post)
+      type: "GET",
       async: true,
-      dataType: "json", //요청한 데이터 타입
+      dataType: "json",
       cache: false,
-      success: function(response){ //전송에 성공하면 실행될 코드
-        //alert(JSON.stringify(response));
+      success: function(response){
         $("#Player0").html("-");
         $("#Player1").html("-");
         $("#Player2").html("-");
@@ -184,39 +181,38 @@ else{
             document.getElementById('t2').innerHTML ="<img src='../img/trainee2.png' style='width:130px; height:130px;'/>";
           if(checkT_result == 3)
             document.getElementById('t3').innerHTML ="<img src='../img/trainee3.png' style='width:130px; height:130px;'/>";
-          }
-          }
-
+        }
+      }
     });
   }
-  /*운동 시작 버튼 활성화 비활성화*/
+  /*운동 시작 버튼 활성화 & 비활성화*/
   function ablebutton(roomidx, playerid){
     $.ajax({
-      url: "abledisable.php?roomidx="+roomidx+"&playerid="+playerid,
+      url: "abledisable.php?roomidx="+roomidx+"&playerid="+playerid, //받아올 내용이 있는 url
       type: "GET",
       async: true,
       dataType: "json",
       cache: false,
       success: function(response){
-        if(response.checkT > 0){
+        if(response.checkT > 0){ //트레이니일 경우 비활성화
           $('#startbtn').attr('disabled', true);
         }
-        else{
+        else{ //트레이너일 경우 모든 사용자의 연결 체크후 활성화 & 비활성화 결정
           $('#startbtn').attr('disabled', true);
           var TrainerButton = setInterval('trainerButton(roomidx)', 100);
         }
       }
     });
   }
+  /*트레이너 화면의 운동 시작 버튼을 활성화*/
   function trainerButton(roomidx){
     $.ajax({
-      url: "allchecking.php?roomidx="+roomidx,
+      url: "allchecking.php?roomidx="+roomidx, //받아올 내용이 있는 url
       type: "GET",
       async: true,
       dataType: "json",
       cache: false,
       success: function(response){
-        //alert(JSON.stringify(response));
         if(response.checking == 1){
           $('#startbtn').attr('disabled', false);
           $('#startbtn').css("background-color","#813f7f");
@@ -228,7 +224,7 @@ else{
       }
     });
   }
-  /*운동 시작 버튼을 누른 경우 실행*/
+  /*운동 시작 버튼 클릭 여부 확인*/
   function clickButton(){
     $.ajax({
       url: "clickbtn.php?roomidx="+roomidx+"&playerid="+playerid,
@@ -244,7 +240,7 @@ else{
     win1.focus();
     win2.focus();
   }
-  /*트레이너가 운동 시작 버튼을 누른 경우, 각각의 사용자가 다음 페이지로 이동*/
+  /*트레이너가 운동 시작 버튼을 누른 경우, 모든 사용자가 다음 페이지로 이동*/
   function startExercise(){
     $.ajax({
       url: "startexercise.php?roomidx="+roomidx+"&playerid="+playerid,
@@ -254,7 +250,6 @@ else{
       cache: false,
       success: function(response){
         if(response.click == 1 && response.checkT == 0){
-
           location.href = "TMView.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx";?>";
         }
         else if(response.click == 1 && response.checkT > 0){
@@ -271,23 +266,23 @@ else{
   <div id="top">
     <a href="exit_ok.php?<?php echo "roomidx=$roomidx"; ?>" style="text-decoration: none; color:black;">
     <br><img src="../img/logo.png" alt="we fit 로고" width="7%" align="center"><?php echo " $roomtitle"; ?></a>
-    <!--<a href="ingUser.php?<?php //echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer";?>" style="position: absolute; right: 0; margin-right:70px;">--><input style="position: absolute; right: 0; margin-right:70px; margin-top:50px; background-color:#b2afa6;" id="startbtn" class="make" type="button" value="시작하기" onclick='clickButton()'/><!--</a>-->
+    <input style="position: absolute; right: 0; margin-right:70px; margin-top:50px; background-color:#b2afa6;" id="startbtn" class="make" type="button" value="시작하기" onclick='clickButton()'/>
   </div>
 
   <div class="content-wrapper">
     <div class="container" align="center">
       <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
-        <div class="card-header bg-transparent border-wefit text-wefit text-center " style="font-family: 'a고딕17'; font-size: 20px;"><img src="../img/crown.png" style="width:25px; height:25px;"/>&nbspTrainer&nbsp<img src="../img/crown.png" style="width:25px; height:25px;"/></div>
+        <div class="card-header bg-transparent border-wefit text-wefit text-center " style="font-family: 'a고딕16'; font-size: 20px;"><img src="../img/crown.png" style="width:25px; height:25px;"/>&nbsp<b>Trainer</b>&nbsp<img src="../img/crown.png" style="width:25px; height:25px;"/></div>
         <div class="card-body">
-          <span id="t0"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
+          <span id="t0"><img src="../img/white-question.png" style="width:130px; height:130px; margin-bottom:15px"/></span>
           <br>
-          <h5 id="Player0" class="card-title">-</h5>
+          <h5 id="Player0" class="card-title" style="margin-top:10px;">-</h5>
         </div>
-        <div class="card-footer bg-transparent border-wefit">
-          <b>Wearables </b>
+        <div class="card-footer bg-transparent border-wefit" style="font-family: 'a고딕16'; font-size: 13pt;">
+          <span>Wearables </span>
           <span id="wIcon0"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
           &nbsp
-          <b>Kinect</b>
+          <span>Kinect</span>
           <span id="kIcon0"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
         </div>
       </div>
@@ -296,51 +291,50 @@ else{
     <div class="container" align="center">
       <center>
         <div class="card-deck mb-3 text-center" style="padding-left: 92px;">
-
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f; ">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player1</div>
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><b>Player1</b></div>
             <div class="card-body">
-              <span id="t1"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
+              <span id="t1"><img src="../img/white-question.png" style="width:130px; height:130px; margin-bottom:15px"/></span>
               <br>
-              <h5 id="Player1" class="card-title">-</h5>
+              <h5 id="Player1" class="card-title" style="margin-top:10px;">-</h5>
             </div>
-            <div class="card-footer bg-transparent border-wefit">
-              <b>Wearables </b>
+            <div class="card-footer bg-transparent border-wefit" style="font-family: 'a고딕16'; font-size: 13pt;">
+              <span>Wearables </span>
               <span id="wIcon1"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
-              <b>Kinect</b>
+              <span>Kinect</span>
               <span id="kIcon1"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>
 
           <div class="card border-wefit mb-3" style="max-width: 18rem; border:4px solid #813f7f;">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player2</div>
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><b>Player2</b></div>
             <div class="card-body">
               <span id="t2"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
               <br>
-              <h5 id="Player2" class="card-title">-</h5>
+              <h5 id="Player2" class="card-title" style="margin-top:10px;">-</h5>
             </div>
-            <div class="card-footer bg-transparent border-wefit">
-              <b>Wearables </b>
+            <div class="card-footer bg-transparent border-wefit" style="font-family: 'a고딕16'; font-size: 13pt;">
+              <span>Wearables </span>
               <span id="wIcon2"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
-              <b>Kinect</b>
+              <span>Kinect</span>
               <span id="kIcon2"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>
 
-          <div class="card border-wefit mb-3" style="max-width: 18rem;border:4px solid #813f7f;">
-            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕17'; font-size: 20px;">Player3</div>
+          <div class="card border-wefit mb-3" style="max-width:18rem; border:4px solid #813f7f;">
+            <div class="card-header bg-transparent border-wefit text-wefit text-center" style="font-family: 'a고딕16'; font-size: 20px;"><b>Player3</b></div>
             <div class="card-body">
               <span id="t3"><img src="../img/white-question.png" style="width:130px; height:130px;margin-bottom:15px"/></span>
               <br>
-              <h5 id="Player3" class="card-title">-</h5>
+              <h5 id="Player3" class="card-title" style="margin-top:10px;">-</h5>
             </div>
-            <div class="card-footer bg-transparent border-wefit">
-              <b>Wearables </b>
+            <div class="card-footer bg-transparent border-wefit" style="font-family: 'a고딕16'; font-size: 13pt;">
+              <span>Wearables </span>
               <span id="wIcon3"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
               &nbsp
-              <b>Kinect</b>
+              <span>Kinect</span>
               <span id="kIcon3"><img src="../img/close.png" style="width:20px; height:20px;"/></span>
             </div>
           </div>

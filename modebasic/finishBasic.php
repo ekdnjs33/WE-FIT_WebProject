@@ -1,4 +1,7 @@
 <?php
+echo '<meta http-equiv="Content-Type" content="text/html" charset="utf-8">';
+echo "<body style='background:#f5c94c'>";
+
 include('../config.php');
 
 $playerid = $_GET['playerid'];

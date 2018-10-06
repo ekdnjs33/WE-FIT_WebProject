@@ -6,7 +6,7 @@ echo "<body style='background:#f5c94c'>";
 include("config.php");
 session_start();
 
-if($_POST["userid"] != ""){ //index.html에서 가져오는 부분
+if($_POST["userid"] != ""){ 
   $myuserid = $_POST["userid"];
   $myuserpw = $_POST["userpw"];
 
