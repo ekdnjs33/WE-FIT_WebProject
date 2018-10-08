@@ -30,11 +30,11 @@ $player=$row['id'];
 
     /*실시간 날짜와 시간을 받아오는 함수*/
     function getFormatDate(date){
-      var year = date.getFullYear();
+      /*var year = date.getFullYear();
       var mon = (1+date.getMonth());
       mon = mon>=10?mon:'0'+mon;
       var day = date.getDate();
-      day = day>=10?day:'0'+day;
+      day = day>=10?day:'0'+day;*/
       var hour = date.getHours();
       hour = hour>=10?hour:'0'+hour;
       var min = date.getMinutes();
@@ -42,7 +42,7 @@ $player=$row['id'];
       var sec = date.getSeconds();
       sec = sec>=10?sec:'0'+sec;
 
-      return year+"-"+mon+"-"+day+" "+hour+":"+min+":"+sec;
+      return hour+":"+min+":"+sec; //year+"-"+mon+"-"+day+" "+
     }
     /*키넥트 서버에서 mode2을 콜하는 함수*/
     function basicServerCall( pmajor, tradingId){
@@ -55,18 +55,20 @@ $player=$row['id'];
         dataType: "json",
       	cache: false,
       	success: function(data){
+          $(".countdown").html(nowtime);
           if(data == 1){
             if(up > 1){
               $(".minus").html("-1"); //화면에 뿌리기
               $(".feedback").html("더 올라가야해요!!");
               $(".updown").html("UP");
               basicDB(1, pmajor);
-             up=0;
+              up=0;
+            }else{
+              $(".minus").html("-"); //화면에 뿌리기
+              $(".feedback").html("올라가세요");
+              $(".updown").html("UP");
+              up+=0.4;
             }
-            $(".minus").html("-"); //화면에 뿌리기
-            $(".feedback").html("올라가세요");
-            $(".updown").html("UP");
-            up+=0.4;
           }
           else if(data == 2){
             if(down > 1){
@@ -75,16 +77,23 @@ $player=$row['id'];
               $(".updown").html("DOWN");
               basicDB(1, pmajor);
              down=0;
+           }else{
+             $(".minus").html("-"); //화면에 뿌리기
+             $(".feedback").html("내려가세요");
+             $(".updown").html("DOWN");
+             down+=0.4;
             }
-            $(".minus").html("-"); //화면에 뿌리기
-            $(".feedback").html("내려가세요");
-            $(".updown").html("DOWN");
-            down+=0.4;
           }
-          else if(data == 0){
+          else if(data == 5){
             $(".minus").html("-");
             $(".feedback").html("좋아요:)");
             $(".updown").html("GOOD");
+          }
+          else if(data == 6){
+            $(".minus").html("-");
+            $(".feedback").html("운동 끝");
+            $(".updown").html("END");
+            clearInterval(servertimer);
           }
       	}
       });

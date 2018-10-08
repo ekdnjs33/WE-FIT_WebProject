@@ -29,11 +29,11 @@ include('../lock.php');
 
       <div id="container" align="center">
         <a class="mode-url" href="BMEntrance1.php" style="text-decoration: none;">
-          <div class="mode2"><p style="margin-top:78px;">스쿼트 심화 운동</p>
+          <div class="mode2"><p style="margin-top:78px;">스쿼트 심화 운동(Squat)</p>
           </div>
         </a>
         <a class="mode-url" href="BMEntrance2.php" style="text-decoration: none;">
-          <div class="mode2"><p style="margin-top:78px;">런지 심화 운동</p>
+          <div class="mode2"><p style="margin-top:78px;">런지 심화 운동(Lunge)</p>
           </div>
         </a>
 
