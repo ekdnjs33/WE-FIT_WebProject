@@ -12,9 +12,15 @@ $score = $row['score'];
 $id = $row['id'];
 $idx = $row['idx'];
 
-$result = $score - $minus;
-//그 수강생의 score를 감점된 점수로 갱신
-$result_sql = mysqli_query($db, "UPDATE player SET score = $result WHERE id = $id");
+if($minus > 1){
+  $result = $score - 1;
+  //그 수강생의 score를 감점된 점수로 갱신
+  $result_sql = mysqli_query($db, "UPDATE player SET score = $result WHERE id = $id");
+}else{
+  $result = $score;
+  //그 수강생의 score를 감점된 점수로 갱신
+  $result_sql = mysqli_query($db, "UPDATE player SET score = $result WHERE id = $id");
+}
 
 //현재 같은 방 수강생끼리의 순위를 비교하여 가져옴
 $rank_sql = mysqli_query($db, "SELECT idx, id, checkT, score, (SELECT COUNT(*)+1 FROM player WHERE score > b.score AND idx = $idx) AS rank FROM player AS b WHERE id = $id ORDER BY rank ASC");

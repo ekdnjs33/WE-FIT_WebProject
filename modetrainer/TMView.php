@@ -25,7 +25,7 @@ $player = $row['id'];
     }
     </style>
     <script>
-    var seconds = 9;
+    var seconds = 29;
     var roomidx = "<?php echo $roomidx; ?>";
     var playerid = "<?php echo $player; ?>";
 
@@ -133,7 +133,7 @@ $player = $row['id'];
   </head>
   <body>
     <div class="wrapper">
-      <div class="one">10초 후에 운동을 시작합니다.</div>
+      <div class="one">30초 후에 운동을 시작합니다.</div>
       <div class="two1" style="font-size:20px"><p>트레이너 영상</p>
         <div id="container">
           <video autoplay="true" id="videoElement"></video>
@@ -141,7 +141,7 @@ $player = $row['id'];
       </div>
       <div class="two2">
         <div class="resultshow">
-          <p id="down" class="countdown2">10</p>
+          <p id="down" class="countdown2">30</p>
           <p class="now2"><img src="../img/logo.png" alt="we fit 로고" width="45%" align="center"></p>
           <!--<p style="font-size: 32pt;" id="nowtime">-</p>-->
 

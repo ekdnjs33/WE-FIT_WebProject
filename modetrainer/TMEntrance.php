@@ -236,9 +236,9 @@ else{
       }
     });
     var win1 = window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#4";?>",'_blank',"shilpijain","modal=no");
-    var win2 = window.open("ingUser.php?<?php echo "roomtitle=$roomtitle&roomidx=$roomidx&trainer=$trainer#6";?>",'_blank',"shilpijain","modal=no");
+
     win1.focus();
-    win2.focus();
+
   }
   /*트레이너가 운동 시작 버튼을 누른 경우, 모든 사용자가 다음 페이지로 이동*/
   function startExercise(){

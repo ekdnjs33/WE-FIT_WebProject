@@ -25,7 +25,7 @@ $trainerOrNot = $trainer_row['checkT'];
     <script src="../js/jquery.js"></script>
     <link href="../css/inguser.css" rel="stylesheet"></link>
     <script>
-    var seconds = 9;
+    var seconds = 29;
     var pmajor = "<?php echo $player_major; ?>";
     var tmajor = "<?php echo $trainer_major; ?>";
     var roomidx = "<?php echo $roomidx; ?>";
@@ -82,14 +82,16 @@ $trainerOrNot = $trainer_row['checkT'];
 
           if(minusScore == 0){
             $(".one").html("훌륭해요:)");
+            $(".minus").html("-");
           }
           else if(minusScore > 0 && minusScore < 2){
             $(".one").html("좋아요:>");
+            $(".minus").html("-");
           }
           else if(minusScore > 1){
             $(".one").html("분발해요:(");
+            $(".minus").html("-1");
           }
-          $(".minus").html(minus_result);
           $(".score").html(score_result); //화면에 뿌리기
           $(".rank").html(rank_result);
          }
@@ -131,13 +133,13 @@ $trainerOrNot = $trainer_row['checkT'];
   </head>
   <body>
     <div class="wrapper">
-      <div class="one">10초 후에 운동을 시작합니다.</div>
+      <div class="one">30초 후에 운동을 시작합니다.</div>
       <div class="two1">
           <p id="videoName1" style="font-size:20px">트레이너 영상</p><br><br><br>
       <video id="localVideo" autoplay style="max-width: 650px;"></video></div>
       <div class="two2">
         <div class="resultshow">
-          <p id="down" class="countdown">10</p>
+          <p id="down" class="countdown">30</p>
           <p class="minus" style="color:red">-</p>
           <p class="now">현재 순위</p>
           <p class="rank">1</p>
